@@ -1,4 +1,6 @@
-ruby '3.2.2'
+# for dockerize
+ruby '2.7.5'
+#ruby '3.2.2'
 
 source "https://rubygems.org"
 
@@ -12,4 +14,3 @@ end
 gem 'sinatra-activerecord'
 gem 'sqlite3'
 gem 'rake'
-

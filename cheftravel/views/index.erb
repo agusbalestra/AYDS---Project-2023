@@ -1,9 +1,24 @@
+<!DOCTYPE html>
 <html>
-  <head>Bienvenido a ChefTravel <br></head>
-  <body> Inserte su nombre para ingresar o crear su usuario<br>
+  <head>
+    <title>Bienvenido a ChefTravel</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bienvenido a ChefTravel</h1>
+    <p>Inserte su nombre y clave para ingresar o crear su usuario</p>
     <form action="/users" method="POST">
-      <input type="name" name="name">
-      <button>Register</button>  
+      <input type="text" name="name" placeholder="Nombre">
+      <input type="password" name="password" placeholder="Contraseña">
+      <button>Register</button>
     </form>
   </body>
 </html>
