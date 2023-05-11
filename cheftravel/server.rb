@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/reloader'
+require 'bundler/setup'
 
  
 set :database, {adapter: "sqlite3", database: "db.sqlite3"}
