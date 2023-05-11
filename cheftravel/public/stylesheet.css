@@ -1,0 +1,68 @@
+/* Define las propiedades de la fuente a utilizar */
+@font-face {
+  font-family: '';
+  src: url('');
+}
+
+/* Aplica la fuente a todo el documento */
+body {
+  font-family: '', sans-serif;
+}
+
+/* Estiliza el botón */
+button {
+  background-color: #3b3f3cb7;
+  color: #FFFFFF;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* Estiliza los campos de entrada */
+input[type="text"], input[type="password"] {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+/* Estiliza el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Estiliza el logo */
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Define los colores predominantes del planeta tierra */
+body {
+  background-color: #1E1F20;
+  color: #BEBEBE;
+}
+
+/* Estiliza el encabezado */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 50px;
+}
+
+/* Estiliza el párrafo */
+p {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 20px;
+}
