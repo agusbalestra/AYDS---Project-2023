@@ -8,7 +8,7 @@
     body {
       background-color: #f2f2f2;
       text-align: center;
-      padding: 20px;
+      padding: 10px;
     }
     
     img {
@@ -19,12 +19,17 @@
   </style>
   <h1>A ver qué tanto sabes sobre gastronomía Argentina, papá</h1>
   <p>¿Cuál es el ingrediente principal de una milanesa a caballo?</p>
-  <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/views/milanga.jpg?raw=true" border="1" width="300" height="200">
+  <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/milanga.jpg?raw=true" border="1" width="300" height="200">
   <h2>Opciones:</h2>
+  <form action="/question" method="GET">
+    <input type="submit" name="option" value="Tomate"><br><br>
+    <input type="submit" name="option" value="Jamon"><br><br>
+    <input type="submit" name="option" value="Queso"><br><br>
+    <input type="submit" name="option" value="Huevo"><br><br>
+  </form>
+  Te bancas otra o sos cagon?<br><br>
+  <a href="http://localhost:4567/question"><input type="button" name = "sig" value="Siguiente pregunta!"><br><br>
   
-  <a href="http://localhost:4567/question/incorrect"><input type="submit" name="option" value="Tomate"></a><br><br>
-  <a href="http://localhost:4567/question/incorrect"><input type="submit" name="option" value="Jamon"></a><br><br>
-  <a href="http://localhost:4567/question/incorrect"><input type="submit" name="option" value="Queso"></a><br><br>
-  <a href="http://localhost:4567/question/correct"><input type="submit" name="option" value="Huevo"></a><br><br>
+  <a href="http://localhost:4567/menu"><input type="button" name = "menu" value="Volver al menu">
 </body>
 </html>
