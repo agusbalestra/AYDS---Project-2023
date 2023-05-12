@@ -18,10 +18,15 @@
     }
   </style>
   <h1>A ver qué tanto sabes sobre gastronomía Argentina, papá</h1>
-  <p>¿Cuál es el ingrediente principal de una milanesa a caballo?</p>
+  <p><%= @question.text%></p>
+  <p><%= @users.to_json%></p>
+  
+
+  
   <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/milanga.jpg?raw=true" border="1" width="300" height="200">
   <h2>Opciones:</h2>
-  <form action="/question" method="GET">
+  
+  <form action="/question/:id" method="POST">
     <input type="submit" name="option" value="Tomate"><br><br>
     <input type="submit" name="option" value="Jamon"><br><br>
     <input type="submit" name="option" value="Queso"><br><br>

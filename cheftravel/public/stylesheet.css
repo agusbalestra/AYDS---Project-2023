@@ -35,7 +35,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 30vh;
 }
 
 /* Estiliza el logo */
@@ -66,3 +66,11 @@ p {
   font-size: 1.5em;
   margin-top: 20px;
 }
+
+
+img {
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+

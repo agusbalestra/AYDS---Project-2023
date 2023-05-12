@@ -2,6 +2,9 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/reloader'
 require 'bundler/setup'
+require_relative 'models/question' 
+require_relative 'models/user' 
+require_relative 'models/answer' 
 
  
 set :database, {adapter: "sqlite3", database: "db.sqlite3"}
@@ -16,28 +19,23 @@ class App < Sinatra::Application
     erb :index
   end
 
-  # Crea o encuentra un usurio en la bdd dependiendo del nombre que inserte
-  post '/users' do
+
+  post '/menu' do
     @user = User.find_or_create_by(name: params[:name], password: params[:password])
-
-    erb :user
-  end
-
-  # Lista todos los usuarios registrados en la base de datos
-  get '/users' do
-    @users = User.all
     
-    erb :users
-  end
-
-  get '/menu' do
-
     erb :menu
   end
 
-  get '/question' do
-
+  get '/question/:id' do
+    @question = Question.find_by(id: params[:id])
+    @users = User.last
     erb :question
+  end
+
+  post '/question' do
+    #user
+    #question
+    #option
   end
 
 

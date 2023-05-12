@@ -5,22 +5,18 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
   <body>
-  
-  <style>
-        
-    img {
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    <style>
+    .centrar {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    
-  
-  </style>
 
+    </style>
     <h1>Bienvenido a ChefTravel</h1>
-    <img src="RUTA" border="1" width="300" height="200">
+    <img src="https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/373c7a4561fbe5c015f89fad24eca296c4050d9c/cheftravel/public/cheftravel.png" border="0" width="200" height="200" class="centrar">
     <p>Inserte su nombre y clave para ingresar o crear su usuario</p>
-    <form action="/users" method="POST">
+    <form action="/menu" method="POST">
       <input type="text" name="name" placeholder="Nombre">
       <input type="password" name="password" placeholder="Contraseña">
       <button>Register</button>
