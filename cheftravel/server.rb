@@ -11,8 +11,6 @@ class App < Sinatra::Application
     super()
   end
 
-  class User < ActiveRecord::Base
-  end 
 
   get '/' do
     erb :index
@@ -21,7 +19,7 @@ class App < Sinatra::Application
   # Crea o encuentra un usurio en la bdd dependiendo del nombre que inserte
   post '/users' do
     @user = User.find_or_create_by(name: params[:name], password: params[:password])
-    
+
     erb :user
   end
 
