@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChefTravel</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+
+<style>
+  body {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 10px;
+  }
+
+  img {
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  p, label, input[type="submit"] {
+    font-family: 'Arial', sans-serif;
+  }
+
+  input[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .result-message {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+</style>
+
+<script>
+  function goToNextQuestion() {
+    var currentId = parseInt(window.location.href.split("/").pop());
+    window.location.href = "http://localhost:4567/question/" + (currentId + 1);
+  }
+</script>
+
+<img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/2484664.jpg?raw=true" border="1" width="300" height="200">
+
+<h2 class="result-message"><%= result_message %></h2>
+
+<button onclick="goToNextQuestion()">Siguiente pregunta!</button><br><br>
+
+</body>
+</html>
