@@ -19,34 +19,71 @@ class App < Sinatra::Application
     erb :index
   end
 
+  get '/register' do
+    erb :register
+  end
 
-  post '/menu' do
-    @user = User.find_or_create_by(name: params[:name], password: params[:password])
+  post '/registermenu' do
+    @@user = User.create(name: params[:name], password: params[:password], 
+                                firstname: params[:firstname], lastname: params[:lastname],
+                                email: params[:email], points: 0)
+    @@user.save
+
+      erb :menu
+  end
+
+
+  post '/logmenu' do
+    @@user = User.find_by(name: params[:name], password: params[:password])
     
+    erb :menu
+  end
+  
+  get '/menu' do
+
     erb :menu
   end
 
   get '/question/:id' do
-    @question = Question.find_by(id: params[:id])
-    @answers = Answer.where(question_id: @question.id)
-    @users = User.last
+    @@question = Question.find_by(id: params[:id])
+    @answers = Answer.where(question_id: @@question.id)
+
     
     erb :question
   end
 
   post '/question' do
-    user = User.last
-    question = Question.find(params[:question_id])
+
     option_id = params[:option_id].to_i
     option = Answer.find(option_id)
-  
+
     if option.correct
       result_message = "¡CORRECTO!"
+      if @@question.difficulty.to_i == 1
+        @@user.update(points: @@user.points.to_i+10)
+      else
+        if @@question.difficulty.to_i == 2
+          @@user.update(points: @@user.points.to_i+20)
+        else
+          @@user.update(points: @@user.points.to_i+30)
+        end
+      end
+
     else
       result_message = "INCORRECTO"
+      if @@question.difficulty.to_i == 1
+        @@user.update(points: @@user.points.to_i-10)
+      else
+        if @@question.difficulty.to_i == 2
+          @@user.update(points: @@user.points.to_i-20)
+        else
+          @@user.update(points: @@user.points.to_i-30)
+        end
+  
+      end
     end
   
-    erb :result, locals: { result_message: result_message }
+    erb :result, locals: { result_message: result_message, id: @@question.id }
   end
 
 

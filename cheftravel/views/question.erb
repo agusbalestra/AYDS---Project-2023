@@ -10,9 +10,9 @@
     }
 
     body {
-    background-color: #3b3f3c86;
-    text-align: center;
-    padding: 10px;
+      background-color: #3b3f3c86;
+      text-align: center;
+      padding: 10px;
     }
 
     img {
@@ -48,39 +48,49 @@
       margin-top: 50px;
     }
 
-  </style>
-  <script>
-    function goToNextQuestion() {
-      var currentId = parseInt(window.location.href.split("/").pop());
-      window.location.href = "http://localhost:4567/question/" + (currentId + 1);
+    .puntos-izq {
+      color: black;
+      position: absolute;
+      bottom: 0;
+      right: 1;
     }
-  </script>
+    .nombre-der {   
+      color: black;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+  </style>
+
 </head>
 <body>
-  <h1>A ver qué tanto sabes sobre gastronomía Argentina, papá</h1>
+  <h1>A ver qué tanto sabes sobre gastronomía Argentina, <%= @@user.firstname.to_json%></h1>
   
-  <p><%= @users.name.to_json%></p>
+
   
   <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/milanga.jpg?raw=true" border="1" width="300" height="200">
   
   <main>
-      <h2><%= @question.text %></h2>
+      <h2><%= @@question.text %></h2>
       <form action="/question" method="POST">
-        <input type="hidden" name="question_id" value="<%= @question.id %>">
+        <input type="hidden" name="question_id" value="<%= @@question.id %>">
         <% @answers.each do |answer| %>
           <label>
             <input type="radio" name="option_id" value="<%= answer.id %>">
-            <%= answer.text %>
+            <%= answer.text %><br>
           </label><br>
         <% end %>
-        <input type="submit" value="Responder">
+        <br><input type="submit" value="Responder">
       </form>
     </main>
 
-  <br><br>
-  Te bancas otra o sos cagon?<br><br>
-  <button onclick="goToNextQuestion()">Siguiente pregunta!</button><br><br>
+  <br>
+
+    <p class="puntos-izq"> Puntos: <%= @@user.points.to_json%></p>
+    <p class="nombre-der"> <%= @@user.name.to_json%></p>
   
-  <a href="http://localhost:4567/menu"><input type="button" name = "menu" value="Volver al menu">
+  <a href="http://localhost:4567/menu"><input type="submit" name = "menu" value="Volver al menu">
+  </div>
 </body>
 </html>

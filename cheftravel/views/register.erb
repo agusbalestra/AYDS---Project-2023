@@ -13,16 +13,17 @@
     }
 
     </style>
-    <h1>Bienvenido a ChefTravel</h1>
+    <h1>Registrese en ChefTravel de manera gratuita</h1>
     <img src="https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/373c7a4561fbe5c015f89fad24eca296c4050d9c/cheftravel/public/cheftravel.png" border="0" width="200" height="200" class="centrar">
-    <p>Inserte su nombre de usuario y su clave para ingresar</p>
-    <form action="/logmenu" method="POST">
+    <p>Inserte sus datos a continuacion</p><br>
+    <form action="/registermenu" method="POST">
+      <input type="text" name="firstname" placeholder="Nombre">
+      <input type="text" name="lastname" placeholder="Apellido">
+      <input type="text" name="email" placeholder="E-mail">
       <input type="text" name="name" placeholder="Nombre de usuario">
       <input type="password" name="password" placeholder="Contraseña">
-      <button>Let's cook!</button>
-    </form>
-    <form action="/register" method="GET">
-        <a href="http://localhost:4567/register"><button>No tienes cuenta? Registrate gratis!</button>
+      <button>Let's cook!</button><br>
+
     </form>
   </body>
 </html>

@@ -47,18 +47,13 @@
   }
 </style>
 
-<script>
-  function goToNextQuestion() {
-    var currentId = parseInt(window.location.href.split("/").pop());
-    window.location.href = "http://localhost:4567/question/" + (currentId + 1);
-  }
-</script>
+
 
 <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/2484664.jpg?raw=true" border="1" width="300" height="200">
 
 <h2 class="result-message"><%= result_message %></h2>
-
-<button onclick="goToNextQuestion()">Siguiente pregunta!</button><br><br>
+<p>Tus puntos actuales son: <%=@@user.points.to_json%></p><br><br>
+<a href="http://localhost:4567/question/<%=id+1%>"> <button>Siguiente pregunta!</button><br><br>
 
 </body>
 </html>
