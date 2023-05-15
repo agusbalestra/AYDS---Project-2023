@@ -67,9 +67,7 @@
 <body>
   <h1>A ver qué tanto sabes sobre gastronomía Argentina, <%= @@user.firstname%></h1>
   
-
-  
-  <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/milanga.jpg?raw=true" border="1" width="300" height="200">
+  <img src="<%= @@question.link_imagen %>" border="1" width="300" height="200">
   
   <main>
       <h2><%= @@question.text %></h2>

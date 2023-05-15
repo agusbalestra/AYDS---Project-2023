@@ -1,4 +1,5 @@
 # Seed data for questions and answers
+Answer.destroy_all
 Question.destroy_all
 
 question1 = Question.create(text: "¿Cuál es el ingrediente principal de una empanada argentina?", difficulty: 1)
@@ -36,3 +37,9 @@ Answer.create(text: "Buenos Aires", correct: true, question: question6)
 Answer.create(text: "Mendoza", correct: false, question: question6)
 Answer.create(text: "Córdoba", correct: false, question: question6)
 Answer.create(text: "Salta", correct: false, question: question6)
+
+question7 = Question.create(text: "¿Cual es el ingrediente principal de la milanesa a caballo?", difficulty: 2, link_imagen: "https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/main/cheftravel/public/milanga.jpg")
+Answer.create(text: "Tomate", correct: false, question: question7)
+Answer.create(text: "Jamon", correct: false, question: question7)
+Answer.create(text: "Huevo", correct: true, question: question7)
+Answer.create(text: "Queso", correct: false, question: question7)
