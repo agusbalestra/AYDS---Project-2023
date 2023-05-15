@@ -28,7 +28,7 @@ class App < Sinatra::Application
                          firstname: params[:firstname], lastname: params[:lastname],
                          email: params[:email], points: 0)
 
-    erb :menu
+    erb :argentina
   end
 
 
