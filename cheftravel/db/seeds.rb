@@ -1,6 +1,7 @@
 # Seed data for questions and answers
 Answer.destroy_all
 Question.destroy_all
+User.destroy_all
 
 question1 = Question.create(text: "¿Cuál es el ingrediente principal de una empanada argentina?", difficulty: 1, link_imagen: "https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_questions/emapanada.png?raw=true")
 Answer.create(text: "Queso", correct: false, question: question1)
