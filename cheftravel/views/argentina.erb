@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>ChefTravel</title>
+  
+  <link rel="stylesheet" type="text/css" href="arg.css">
+  <script src="https://kit.fontawesome.com/8f53256014.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+		<nav>
+			<ul class="menu">
+        <li><a href="#">Recetario</a></li>
+        <li><a href="http://localhost:4567/ranking">Ranking</a></li>
+        <li><a href="#">Puntos: <%= @@user.points.to_json%></a></li>
+				<li><a href="#"><%= @@user.name%></a></li>
+				<li><a href="http://localhost:4567/">Logout</a></li>
+			</ul>
+		</nav>
+
+    <div id="contenedor">
+      <div class="banner_img" >
+        <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/arg_png.png?raw=true">
+      </div>
+    </div>
+
+<a href="http://localhost:4567/question/1"><button class="button">Level 1</button>
+</body>
+</html>

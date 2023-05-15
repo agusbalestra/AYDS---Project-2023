@@ -35,12 +35,12 @@ class App < Sinatra::Application
   post '/logmenu' do
     @@user = User.find_by(name: params[:name], password: params[:password])
     
-    erb :menu
+    erb :argentina
   end
   
   get '/menu' do
 
-    erb :menu
+    erb :argentina
   end
 
   get '/ranking' do
@@ -92,6 +92,5 @@ class App < Sinatra::Application
   
     erb :result, locals: { result_message: result_message, id: @@question.id }
   end
-
 
 end
