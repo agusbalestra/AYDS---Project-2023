@@ -25,11 +25,10 @@ class App < Sinatra::Application
 
   post '/registermenu' do
     @@user = User.create(name: params[:name], password: params[:password], 
-                                firstname: params[:firstname], lastname: params[:lastname],
-                                email: params[:email], points: 0)
-    @@user.save
+                         firstname: params[:firstname], lastname: params[:lastname],
+                         email: params[:email], points: 0)
 
-      erb :menu
+    erb :menu
   end
 
 
@@ -42,6 +41,14 @@ class App < Sinatra::Application
   get '/menu' do
 
     erb :menu
+  end
+
+  get '/ranking' do
+    @@usersname = User.select(:name).order(points: :desc)
+    @@userspoints = User.select(:points).order(points: :desc)
+    @@n = 0
+
+    erb :ranking
   end
 
   get '/question/:id' do

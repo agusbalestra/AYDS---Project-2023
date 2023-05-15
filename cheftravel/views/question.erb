@@ -65,7 +65,7 @@
 
 </head>
 <body>
-  <h1>A ver qué tanto sabes sobre gastronomía Argentina, <%= @@user.firstname.to_json%></h1>
+  <h1>A ver qué tanto sabes sobre gastronomía Argentina, <%= @@user.firstname%></h1>
   
 
   
@@ -88,7 +88,7 @@
   <br>
 
     <p class="puntos-izq"> Puntos: <%= @@user.points.to_json%></p>
-    <p class="nombre-der"> <%= @@user.name.to_json%></p>
+    <p class="nombre-der">user: <%= @@user.name%></p>
   
   <a href="http://localhost:4567/menu"><input type="submit" name = "menu" value="Volver al menu">
   </div>
