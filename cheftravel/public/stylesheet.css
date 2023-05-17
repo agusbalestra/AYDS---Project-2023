@@ -27,6 +27,7 @@ input[type="text"], input[type="password"] {
   border-radius: 5px;
   padding: 10px 20px;
   margin-top: 10px;
+  border-color: red;
 }
 
 /* Estiliza el formulario */

@@ -24,11 +24,37 @@ class App < Sinatra::Application
   end
 
   post '/registermenu' do
-    @@user = User.create(name: params[:name], password: params[:password], 
-                         firstname: params[:firstname], lastname: params[:lastname],
-                         email: params[:email], points: 0)
 
-    erb :argentina
+    @name = params[:name]
+    @password =  params[:password]
+    @firstname = params[:firstname]
+    @lastname = params[:lastname]
+    @email = params[:email]
+    @reppw = params[:reppw]
+
+    userexists = User.find_by(name: @name)
+
+    if @reppw!=@password
+      @msgfail = "Las contraseñas no coinciden"
+      erb :fail_register
+
+    else if @password.length < 6
+      @msgfail = "Su contraseña es muy corta. El minimo es de 6 caracteres"
+      erb :fail_register
+
+    else if userexists != nil
+      @msgfail = "Ya existe un usuario con ese username. Por favor escoje otro"
+      erb :fail_register
+
+    else
+      @@user = User.create(name: params[:name], password: [:password], 
+        firstname: params[:firstname], lastname: params[:lastname],
+        email: params[:email], points: 0)
+
+      erb :argentina
+    end
+    end
+    end
   end
 
 
@@ -36,6 +62,11 @@ class App < Sinatra::Application
     @@user = User.find_by(name: params[:name], password: params[:password])
     
     erb :argentina
+
+    rescue Exception
+      @msg = "Usuario y/o contraseña incorrectos. Intentalo nuevamente"
+      
+      erb :fail_login
   end
   
   get '/menu' do
@@ -55,8 +86,11 @@ class App < Sinatra::Application
     @@question = Question.find_by(id: params[:id])
     @answers = Answer.where(question_id: @@question.id)
 
-    
     erb :question
+
+    rescue Exception
+      @msg = 'Felicidades! te pasaste ChefTravel, por ahora...'
+      erb :nomorequest
   end
 
   post '/question' do
