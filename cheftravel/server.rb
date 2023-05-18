@@ -47,9 +47,9 @@ class App < Sinatra::Application
       erb :fail_register
 
     else
-      @@user = User.create(name: params[:name], password: [:password], 
-        firstname: params[:firstname], lastname: params[:lastname],
-        email: params[:email], points: 0)
+      @@user = User.create(name: @name, password: @password, 
+        firstname: @firstname, lastname: @lastname,
+        email: @email, points: 0)
 
       erb :argentina
     end
