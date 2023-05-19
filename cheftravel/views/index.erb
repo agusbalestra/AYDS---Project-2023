@@ -2,27 +2,29 @@
 <html>
   <head>
     <title>ChefTravel</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="shortcut icon" href="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/fondoLogin.png?raw=true">
   </head>
   <body>
-    <style>
-    .centrar {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
 
-    </style>
-    <h1>Bienvenido a ChefTravel</h1>
-    <img src="https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/373c7a4561fbe5c015f89fad24eca296c4050d9c/cheftravel/public/cheftravel.png" border="0" width="200" height="200" class="centrar">
-    <p>Inserte su nombre de usuario y su clave para ingresar</p>
-    <form action="/logmenu" method="POST">
-      <input type="text" name="name" placeholder="Nombre de usuario">
-      <input type="password" name="password" placeholder="Contraseña">
-      <button>Let's cook!</button>
-    </form>
-    <form action="/register" method="GET">
-    <a href="http://localhost:4567/register"><button>No tienes cuenta? Registrate gratis!</button>
-    </form>
+    <div class="login-box">
+      <img class="avatar" src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/chef_recortado.png?raw=true" alt="logo de cheftravel">
+      <h1> Login Here </h1>
+      <form action="/logmenu" method="POST">
+        <!-- USERNAME-->
+        <label for="username">Username</label>
+        <input type="text" name="name" placeholder="Enter Username">
+
+        <!-- PASSWORD-->
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Enter password">
+
+        <input type="submit" value="Log in">
+
+        <form action="/register" method="GET">
+          <a href="http://localhost:4567/register">No tienes cuenta? Registrate gratis!</a>
+        </form>
+      </form>
+    </div>
   </body>
 </html>
