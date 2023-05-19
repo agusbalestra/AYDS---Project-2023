@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ChefTravel</title>
   <style>
-    
-    img {
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
     body {
-      background-color: #3b3f3c86;
+      background-image: "https://github.com/eabalestra/AYDS-Project-2023/cheftravel/public/for_others/fondoparamenu.jpg?raw=true";
+      color: #fff;
+      font-family: 'Helvetica Neue', sans-serif;
       text-align: center;
       padding: 10px;
     }
-
     img {
       max-width: 400px;
       border-radius: 10px;
@@ -30,8 +23,55 @@
       font-family: 'Arial', sans-serif;
     }
 
+    .question-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .question-container label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 60px;
+      background-color: #283238;
+      border-radius: 5px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .question-container input[type="radio"] {
+      display: none;
+    }
+
+    .question-container input[type="radio"]:checked + label {
+      background-color: #476b8f;
+      color: white;
+    }
+
+    .question-container input[type="radio"]:checked + label::before {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: white;
+      border-radius: 2px;
+      margin-right: 10px;
+    }
+
+    .question-container label:hover {
+      background-color: #476b8f;
+    }
+
+    .question-container label:hover::before {
+      background-color: #fff;
+    }
+
     input[type="submit"] {
-      background-color: #3b3f3cb7;
+      background-color: #283238;
       border: none;
       color: white;
       padding: 10px 20px;
@@ -41,7 +81,12 @@
       font-size: 16px;
       margin: 4px 2px;
       cursor: pointer;
-      border-radius: 5%;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #476b8f;
     }
 
     .result-message {
@@ -51,46 +96,52 @@
     }
 
     .puntos-izq {
-      color: black;
+      color: #fff;
       position: absolute;
       bottom: 0;
-      right: 1;
+      left: 10px;
+      transition: color 0.3s;
     }
-    .nombre-der {   
-      color: black;
+
+    .nombre-der {
+      color: #fff;
       position: absolute;
       bottom: 0;
-      right: 0;
+      right: 10px;
+      transition: color 0.3s;
+    }
+
+    .puntos-izq:hover, .nombre-der:hover {
+      color: #05a1e6;
     }
 
   </style>
-
 </head>
 <body>
-  <h1>A ver qué tanto sabes sobre gastronomía Argentina, <%= @@user.firstname%></h1>
+  <h1>LEVEL 1</h1>
   
   <img src="<%= @@question.link_imagen %>" border="1" width="300" height="200">
   
   <main>
+    <div class="question-container">
       <h2><%= @@question.text %></h2>
       <form action="/question" method="POST">
         <input type="hidden" name="question_id" value="<%= @@question.id %>">
         <% @answers.each do |answer| %>
-          <label>
-            <input type="radio" name="option_id" value="<%= answer.id %>">
-            <%= answer.text %><br>
-          </label><br>
+          <input type="radio" name="option_id" value="<%= answer.id %>" id="option<%= answer.id %>">
+          <label for="option<%= answer.id %>"><%= answer.text %></label>
         <% end %>
-        <br><input type="submit" value="Responder">
+        <br>
+        <input type="submit" value="Responder">
       </form>
-    </main>
+    </div>
+  </main>
 
   <br>
 
-    <p class="puntos-izq"> Puntos: <%= @@user.points.to_json%></p>
-    <p class="nombre-der">user: <%= @@user.name%></p>
-  
-  <a href="http://localhost:4567/menu"><input type="submit" name = "menu" value="Volver al menu">
-  </div>
+  <p class="puntos-izq">Puntos: <%= @@user.points.to_json%></p>
+  <p class="nombre-der">user: <%= @@user.name%></p>
+
+  <a href="http://localhost:4567/menu"><input type="submit" name="menu" value="Volver al menú"></a>
 </body>
 </html>
