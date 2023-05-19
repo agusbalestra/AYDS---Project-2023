@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>ChefTravel</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
   </head>
   <body>
     <style>
@@ -14,21 +14,48 @@
     .failmsg{
       color: red;
     }
+    body {
+      background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/fondoLogin.jpeg?raw=true");
+      background-size: cover;
+      color: #fff;
+      font-family: 'Helvetica Neue', sans-serif;
+      text-align: center;
+      padding: 10px;
+    }
 
     </style>
-    <h1>Registrese en ChefTravel de manera gratuita</h1>
-    <img src="https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/373c7a4561fbe5c015f89fad24eca296c4050d9c/cheftravel/public/cheftravel.png" border="0" width="200" height="200" class="centrar">
-    <p>Inserte sus datos a continuacion</p>
-    <p class="failmsg" color:red><%= @msgfail %></p><br><br><br>
-    <form action="/registermenu" method="POST">
-      <input type="text" name="firstname" placeholder="Nombre">
-      <input type="text" name="lastname" placeholder="Apellido">
-      <input type="text" name="email" placeholder="E-mail">
-      <input type="text" name="name" placeholder="Nombre de usuario">
-      <input type="password" name="password" placeholder="Contraseña">  
-      <input type="password" name="reppw" placeholder="Repita su contraseña">
-      <button>Let's cook!</button><br>
+    <br><br><br>
+    
+    <div class="login-box">
+      <img class="avatar" src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/chef_recortado.png?raw=true" alt="logo de cheftravel">
+      <br><h1> Registrese </h1>
+      <form action="/registermenu" method="POST">
 
-    </form>
+        <label for="firstname"></label>
+        <input type="text" name="firstname" placeholder="Nombre">
+
+        <label for="lastname"></label>
+        <input type="text" name="lastname" placeholder="Apellido">
+
+        <label for="email"></label>
+        <input type="text" name="email" placeholder="E-mail">
+
+        <!-- USERNAME-->
+        <label for="username"></label>
+        <input type="text" name="name" placeholder="Username">
+
+        <!-- PASSWORD-->
+        <label for="password"></label>
+        <input type="password" name="password" placeholder="Contraseña">
+
+
+        <label for="reppw"></label>
+        <input type="password" name="reppw" placeholder="Repita su Contraseña">
+
+        <input type="submit" value="Let's cook!">
+        <p class="failmsg"><%= @msgfail %></p>
+      </form>
+        <a href="http://localhost:4567/"><input type="submit" value="Volver al login">
+    </div>
   </body>
 </html>

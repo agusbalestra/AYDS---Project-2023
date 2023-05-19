@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <style>
     body {
-      background-image: "https://github.com/eabalestra/AYDS-Project-2023/cheftravel/public/for_others/fondoparamenu.jpg?raw=true";
+      background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/istockphoto-1368602102-612x612-Lue6FtJ5P-transformed.jpeg?raw=true");
+      background-size: cover;
       color: #fff;
       font-family: 'Helvetica Neue', sans-serif;
       text-align: center;
@@ -14,13 +16,12 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
-
     h1, h2, h3 {
       font-family: 'Helvetica Neue', sans-serif;
     }
 
     p, label, input[type="submit"] {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
     }
 
     .question-container {
@@ -137,7 +138,6 @@
     </div>
   </main>
 
-  <br>
 
   <p class="puntos-izq">Puntos: <%= @@user.points.to_json%></p>
   <p class="nombre-der">user: <%= @@user.name%></p>
