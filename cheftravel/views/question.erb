@@ -121,13 +121,13 @@
 <body>
   <h1>LEVEL 1</h1>
   
-  <img src="<%= @@question.link_imagen %>" border="1" width="300" height="200">
+  <img src="<%= @question.link_imagen %>" border="1" width="300" height="200">
   
   <main>
     <div class="question-container">
-      <h2><%= @@question.text %></h2>
+      <h2><%= @question.text %></h2>
       <form action="/question" method="POST">
-        <input type="hidden" name="question_id" value="<%= @@question.id %>">
+        <input type="hidden" name="question_id" value="<%= @question.id %>">
         <% @answers.each do |answer| %>
           <input type="radio" name="option_id" value="<%= answer.id %>" id="option<%= answer.id %>">
           <label for="option<%= answer.id %>"><%= answer.text %></label>
@@ -139,8 +139,8 @@
   </main>
 
 
-  <p class="puntos-izq">Puntos: <%= @@user.points.to_json%></p>
-  <p class="nombre-der">user: <%= @@user.name%></p>
+  <p class="puntos-izq">Puntos: <%= @user.points.to_json%></p>
+  <p class="nombre-der">user: <%= @user.name%></p>
 
   <a href="http://localhost:4567/menu"><input type="submit" name="menu" value="Volver al menú"></a>
 </body>
