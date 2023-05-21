@@ -2,74 +2,11 @@
 <html>
 <head>
   <title>ChefTravel</title>
-  <style>
-    
-    img {
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    body {
-      background-color: #3b3f3c86;
-      text-align: center;
-      padding: 10px;
-    }
-
-    img {
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    h1, h2, h3 {
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    p, label, input[type="submit"] {
-      font-family: 'Arial', sans-serif;
-    }
-
-    input[type="submit"] {
-      background-color: #3b3f3cb7;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 5%;
-    }
-
-    .result-message {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 50px;
-    }
-
-    .puntos-izq {
-      color: black;
-      position: absolute;
-      bottom: 0;
-      right: 1;
-    }
-    .nombre-der {   
-      color: black;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-
-  </style>
-
 </head>
 <body>
   <h1><%= @msg%></h1>
   
-  <img src="" border="1" width="300" height="200"><br><br><br><br>
+  <img src="https://12noticias.tv/wp-content/uploads/2014/09/maradona_ojito.jpg" border="1" width="300" height="200"><br><br><br><br>
 
 
     <p class="puntos-izq"> Puntos: <%= @user.points.to_json%></p>
