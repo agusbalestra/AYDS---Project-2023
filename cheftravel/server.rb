@@ -61,7 +61,7 @@ class App < Sinatra::Application
                          email: @email, points: 0)
       session[:user_id] = user.id
 
-      erb :argentina
+      erb :menu
     end
   end
 
@@ -81,7 +81,7 @@ class App < Sinatra::Application
   get '/menu' do
     if current_user
       @user = current_user
-      erb :argentina
+      erb :menu
     else
       redirect '/'  
     end
@@ -109,40 +109,40 @@ class App < Sinatra::Application
 
   post '/question' do
     if current_user.present?
+      
       option_id = params[:option_id].to_i
       
-      if option_id = 0 # si el usuario no seleciona una respuesta
+      if option_id == 0 # si el usuario no seleciona una respuesta 
         
         redirect "/question/#{params[:question_id]}"
       
-      else
+      else # si el usuario selecciona una respuesta 
 
         option = Answer.find(option_id)
         @question = Question.find(params[:question_id])
         @user = current_user
 
-          if option.correct
-            result_message = "¡CORRECTO!"
-            if @question.difficulty.to_i == 1
-              @user.update(points: @user.points.to_i + 10)
-            elsif @question.difficulty.to_i == 2
-              @user.update(points: @user.points.to_i + 20)
-            else
-              @user.update(points: @user.points.to_i + 30)
-            end
-          else 
-            result_message = "INCORRECTO"
-            if @question.difficulty.to_i == 1
-              @user.update(points: @user.points.to_i - 10)
-            elsif @question.difficulty.to_i == 2
-              @user.update(points: @user.points.to_i - 20)
-            else
-              @user.update(points: @user.points.to_i - 30)
-            end
+        if option.correct
+          result_message = "¡CORRECTO!"
+          if @question.difficulty.to_i == 1
+            @user.update(points: @user.points.to_i + 10)
+          elsif @question.difficulty.to_i == 2
+            @user.update(points: @user.points.to_i + 20)
+          else
+            @user.update(points: @user.points.to_i + 30)
           end
+        else 
+          result_message = "INCORRECTO"
+          if @question.difficulty.to_i == 1
+            @user.update(points: @user.points.to_i - 10)
+          elsif @question.difficulty.to_i == 2
+            @user.update(points: @user.points.to_i - 20)
+          else
+            @user.update(points: @user.points.to_i - 30)
+          end
+        end
 
-          erb :result, locals: { result_message: result_message, id: @question.id }
-
+        erb :result, locals: { result_message: result_message, id: @question.id }
       end
 
     else # else de si el usuario no está logueado
