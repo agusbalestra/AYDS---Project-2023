@@ -48,8 +48,11 @@
 </style>
 
 
-
-<img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
+<% if result_message == '¡CORRECTO!' %>
+  <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
+<% else %>
+  <img src="https://storage.lacapitalmdp.com/2020/02/messienojado.jpg" border="1" width="300" height="200"> 
+<% end %>
 
 <h2 class="result-message"><%= result_message %></h2>
 <p>Puntos actuales: <%=@user.points.to_json%></p><br><br>

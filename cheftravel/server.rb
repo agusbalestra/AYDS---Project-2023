@@ -98,10 +98,15 @@ class App < Sinatra::Application
   get '/question/:id' do
     if current_user.present?
       @question = Question.find_by(id: params[:id])
-      @answers = Answer.where(question_id: @question&.id)
-      @user = current_user
-
-      erb :question
+      if @question.present?
+        @answers = Answer.where(question_id: @question&.id)
+        @user = current_user
+        erb :question
+      else
+        @msg = "Felicidades, te pasaste ChefTavel, por ahora..."
+        @user = current_user
+        erb :nomorequest
+      end
     else
       redirect '/'
     end
