@@ -19,14 +19,17 @@ class App < Sinatra::Application
     super()
   end
 
+  ## 
   get '/' do
     erb :index
   end
 
+  ##
   get '/register' do
     erb :register
   end
 
+  ##REGISTER MENU
   post '/registermenu' do
     @name = params[:name]
     @password = params[:password]
@@ -58,10 +61,11 @@ class App < Sinatra::Application
                          email: @email, points: 0)
       session[:user_id] = user.id
 
-      erb :argentina
+      erb :menu
     end
   end
 
+  ## LOGMENU
   post '/logmenu' do
     @user = User.find_by(name: params[:name], password: params[:password])
 
@@ -75,10 +79,12 @@ class App < Sinatra::Application
   end
 
   get '/menu' do
-    redirect '/' unless current_user
-
-    @user = current_user
-    erb :argentina
+    if current_user
+      @user = current_user
+      erb :menu
+    else
+      redirect '/'  
+    end
   end
 
   get '/ranking' do
@@ -90,46 +96,87 @@ class App < Sinatra::Application
   end
 
   get '/question/:id' do
-    @question = Question.find_by(id: params[:id])
-    @answers = Answer.where(question_id: @question.id)
-    @user = current_user
-
-    erb :question
-
-    rescue Exception
-      @msg = '¡Felicidades! Te pasaste ChefTravel, por ahora...'
-      erb :nomorequest
+    if current_user.present?
+      @question = Question.find_by(id: params[:id])
+      if @question.present?
+        @answers = Answer.where(question_id: @question&.id)
+        @user = current_user
+        erb :question
+      else
+        @msg = "Felicidades, te pasaste ChefTavel, por ahora..."
+        @user = current_user
+        erb :nomorequest
+      end
+    else
+      redirect '/'
+    end
   end
 
   post '/question' do
-    option_id = params[:option_id].to_i
-    option = Answer.find(option_id)
-    @question = Question.find(params[:question_id])
-    @user = current_user
-  
-    if option.correct
-      result_message = "¡CORRECTO!"
-      if @question.difficulty.to_i == 1
-        @user.update(points: @user.points.to_i + 10)
-      elsif @question.difficulty.to_i == 2
-        @user.update(points: @user.points.to_i + 20)
-      else
-        @user.update(points: @user.points.to_i + 30)
-      end
-    else
-      result_message = "INCORRECTO"
-      if @question.difficulty.to_i == 1
-        @user.update(points: @user.points.to_i - 10)
-      elsif @question.difficulty.to_i == 2
-        @user.update(points: @user.points.to_i - 20)
-      else
-        @user.update(points: @user.points.to_i - 30)
-      end
-    end
-  
-    erb :result, locals: { result_message: result_message, id: @question.id }
-  end   
+    if current_user.present?
+      
+      option_id = params[:option_id].to_i
+      
+      if option_id == 0 # si el usuario no seleciona una respuesta 
+        
+        redirect "/question/#{params[:question_id]}"
+      
+      else # si el usuario selecciona una respuesta 
 
+        option = Answer.find(option_id)
+        @question = Question.find(params[:question_id])
+        @user = current_user
+
+        if option.correct
+          result_message = "¡CORRECTO!"
+          if @question.difficulty.to_i == 1
+            @user.update(points: @user.points.to_i + 10)
+          elsif @question.difficulty.to_i == 2
+            @user.update(points: @user.points.to_i + 20)
+          else
+            @user.update(points: @user.points.to_i + 30)
+          end
+        else 
+          result_message = "INCORRECTO"
+          if @question.difficulty.to_i == 1
+            @user.update(points: @user.points.to_i - 10)
+          elsif @question.difficulty.to_i == 2
+            @user.update(points: @user.points.to_i - 20)
+          else
+            @user.update(points: @user.points.to_i - 30)
+          end
+        end
+
+        erb :result, locals: { result_message: result_message, id: @question.id }
+      end
+
+    else # else de si el usuario no está logueado
+      redirect '/'
+    end
+    
+  end
+
+  get '/logout' do
+    session.clear   # Elimina todos los datos de la sesión
+    redirect '/'    # Redirige al usuario a la página de inicio
+  end
+
+  ## PROFILE
+  get '/profile' do
+    if current_user.present?
+      
+      
+      erb :profile
+    else
+      redirect '/'
+    end
+  end
+
+  post '/profile' do
+    
+  end
+
+  ## METHODS
   def current_user
     User.find_by(id: session[:user_id])
   end
