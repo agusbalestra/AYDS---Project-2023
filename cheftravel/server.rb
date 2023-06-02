@@ -7,6 +7,9 @@ require 'bundler/setup'
 require_relative 'models/question'
 require_relative 'models/user'
 require_relative 'models/answer'
+require_relative 'models/level'
+require_relative 'models/recipe'
+
 
 set :database, { adapter: "sqlite3", database: "db.sqlite3" }
 
@@ -79,7 +82,7 @@ class App < Sinatra::Application
   end
 
   get '/menu' do
-    if current_user
+    if current_user.present?
       @user = current_user
       erb :menu
     else
@@ -95,22 +98,23 @@ class App < Sinatra::Application
     erb :ranking
   end
 
-  get '/question/:id' do
-    if current_user.present?
-      @question = Question.find_by(id: params[:id])
-      if @question.present?
-        @answers = Answer.where(question_id: @question&.id)
-        @user = current_user
-        erb :question
-      else
-        @msg = "Felicidades, te pasaste ChefTavel, por ahora..."
-        @user = current_user
-        erb :nomorequest
-      end
-    else
-      redirect '/'
-    end
+  get '/level/:id_level' do
+    @level = Level.find_by(id: params[:id_level])
+    @questions_level = Question.where(levels_id: @level.id)
+    question = @questions_level.first
+
+    redirect "/level/#{params[:id_level]}/question/#{question.id}"
   end
+
+  get '/level/:id_level/question/:id_question' do
+    @level = Level.find_by(id: params[:id_level])   
+    @question = Question.find_by(id: params[:id_question])
+    @answers = Answer.where(question_id: @question.id)
+
+    @user = current_user
+    erb :question
+  end
+  
 
   post '/question' do
     if current_user.present?
@@ -147,7 +151,7 @@ class App < Sinatra::Application
           end
         end
 
-        erb :result, locals: { result_message: result_message, id: @question.id }
+        erb :result, locals: { result_message: result_message, id_question: @question.id , id_level: @question.levels_id}
       end
 
     else # else de si el usuario no está logueado
