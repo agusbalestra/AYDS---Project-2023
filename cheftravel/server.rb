@@ -34,89 +34,89 @@ class App < Sinatra::Application
 
   ##REGISTER MENU
   post '/registermenu' do
-    @name = params[:name]
-    @password = params[:password]
-    @firstname = params[:firstname]
-    @lastname = params[:lastname]
-    @email = params[:email]
-    @reppw = params[:reppw]
+    name = params[:name]
+    password = params[:password]
+    firstname = params[:firstname]
+    lastname = params[:lastname]
+    email = params[:email]
+    reppw = params[:reppw]
 
-    user_exists = User.find_by(name: @name)
+    user_exists = User.find_by(name: name)
 
-    if @reppw != @password
+    if reppw != password
 
-      @msgfail = "Las contraseñas no coinciden"
+      msgfail = "Las contraseñas no coinciden"
       
-      erb :fail_register
-    elsif @password.length < 6
+      erb :fail_register, locals: {msgfail: msgfail}
+    elsif password.length < 6
 
-      @msgfail = "Su contraseña es muy corta. El mínimo es de 6 caracteres"
+      msgfail = "Su contraseña es muy corta. El mínimo es de 6 caracteres"
 
-      erb :fail_register
+      erb :fail_register, locals: {msgfail: msgfail}
     elsif user_exists != nil
 
-      @msgfail = "Ya existe un usuario con ese nombre de usuario. Por favor, elige otro"
+      msgfail = "Ya existe un usuario con ese nombre de usuario. Por favor, elige otro"
 
-      erb :fail_register
+      erb :fail_register, locals: {msgfail: msgfail}
     else
-      user = User.create(name: @name, password: @password,
-                         firstname: @firstname, lastname: @lastname,
-                         email: @email, points: 0)
+      user = User.create(name: name, password: password,
+                         firstname: firstname, lastname: lastname,
+                         email: email, points: 0)
       session[:user_id] = user.id
 
-      erb :menu
+      erb :menu, locals: {user: user}
     end
   end
 
   ## LOGMENU
   post '/logmenu' do
-    @user = User.find_by(name: params[:name], password: params[:password])
+    user = User.find_by(name: params[:name], password: params[:password])
 
-    if @user
-      session[:user_id] = @user.id
+    if user
+      session[:user_id] = user.id
       redirect '/menu'
     else
-      @msg = "Usuario y/o contraseña incorrectos. Inténtalo nuevamente"
-      erb :fail_login
+      msg = "Usuario y/o contraseña incorrectos. Inténtalo nuevamente"
+      erb :fail_login, locals: {msg: msg}
     end
   end
 
   get '/menu' do
     if current_user.present?
-      @user = current_user
-      erb :menu
+      user = current_user
+      
+      erb :menu, locals: {user: user}
     else
       redirect '/'  
     end
   end
 
   get '/ranking' do
-    @usersname = User.select(:name).order(points: :desc)
-    @userspoints = User.select(:points).order(points: :desc)
-    @n = 0
+    usersname = User.select(:name).order(points: :desc)
+    userspoints = User.select(:points).order(points: :desc)
 
-    erb :ranking
+    erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints}
   end
 
   get '/level/:id_level' do
-    @level = Level.find_by(id: params[:id_level])
-    @questions_level = Question.where(levels_id: @level.id)
-    question = @questions_level.first
+    level = Level.find_by(id: params[:id_level])
+    questions_level = Question.where(levels_id: level.id)
+    question = questions_level.first
 
     redirect "/level/#{params[:id_level]}/question/#{question.id}"
   end
 
   get '/level/:id_level/question/:id_question' do
     if current_user.present?
-      @level = Level.find_by(id: params[:id_level])
-      @question = Question.find_by(id: params[:id_question])
+      level = Level.find_by(id: params[:id_level])
+      question = Question.find_by(id: params[:id_question])
       
       #
-      if @level.id == @question.levels_id
-        @answers = Answer.where(question_id: @question.id)
-        @user = current_user
+      if level.id == question.levels_id
+        answers = Answer.where(question_id: question.id)
+        user = current_user
         
-        erb :question
+        erb :question, locals: {level: level, question: question, answers: answers, user: user}
       else
         redirect '/menu'
       end
@@ -138,30 +138,30 @@ class App < Sinatra::Application
       else # si el usuario selecciona una respuesta 
 
         option = Answer.find(option_id)
-        @question = Question.find(params[:question_id])
-        @user = current_user
+        question = Question.find(params[:question_id])
+        user = current_user
 
         if option.correct
           result_message = "¡CORRECTO!"
-          if @question.difficulty.to_i == 1
-            @user.update(points: @user.points.to_i + 10)
-          elsif @question.difficulty.to_i == 2
-            @user.update(points: @user.points.to_i + 20)
+          if question.difficulty.to_i == 1
+            user.update(points: user.points.to_i + 10)
+          elsif question.difficulty.to_i == 2
+            user.update(points: user.points.to_i + 20)
           else
-            @user.update(points: @user.points.to_i + 30)
+            user.update(points: user.points.to_i + 30)
           end
         else 
           result_message = "INCORRECTO"
-          if @question.difficulty.to_i == 1
-            @user.update(points: @user.points.to_i - 10)
-          elsif @question.difficulty.to_i == 2
-            @user.update(points: @user.points.to_i - 20)
+          if question.difficulty.to_i == 1
+            user.update(points: user.points.to_i - 10)
+          elsif question.difficulty.to_i == 2
+            user.update(points: user.points.to_i - 20)
           else
-            @user.update(points: @user.points.to_i - 30)
+            user.update(points: user.points.to_i - 30)
           end
         end
 
-        erb :result, locals: { result_message: result_message, id_question: @question.id , id_level: @question.levels_id}
+        erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user}
       end
 
     else # else de si el usuario no está logueado

@@ -74,10 +74,10 @@
       <th>Puntos</th>
     </tr>
 
-    <% @userspoints.each_with_index do |user, index| %>
+    <% userspoints.each_with_index do |user, index| %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= @usersname[index].name %></td>
+        <td><%= usersname[index].name %></td>
         <td><%= user.points %></td>
       </tr>
     <% end %>
