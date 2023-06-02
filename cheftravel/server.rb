@@ -107,14 +107,24 @@ class App < Sinatra::Application
   end
 
   get '/level/:id_level/question/:id_question' do
-    @level = Level.find_by(id: params[:id_level])   
-    @question = Question.find_by(id: params[:id_question])
-    @answers = Answer.where(question_id: @question.id)
+    if current_user.present?
+      @level = Level.find_by(id: params[:id_level])
+      @question = Question.find_by(id: params[:id_question])
+      
+      #
+      if @level.id == @question.levels_id
+        @answers = Answer.where(question_id: @question.id)
+        @user = current_user
+        
+        erb :question
+      else
+        redirect '/menu'
+      end
 
-    @user = current_user
-    erb :question
+    else # else si no encuentra usuario
+      redirect '/'  
+    end
   end
-  
 
   post '/question' do
     if current_user.present?
