@@ -58,3 +58,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_132034) do
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "levels", column: "levels_id"
 end
+
