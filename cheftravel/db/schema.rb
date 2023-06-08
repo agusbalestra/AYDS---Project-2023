@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_132034) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
   create_table "answers", force: :cascade do |t|
     t.string "text"
     t.boolean "correct", default: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_132034) do
     t.datetime "updated_at", null: false
     t.string "link_imagen"
     t.integer "levels_id"
+    t.string "informed_text"
     t.index ["levels_id"], name: "index_questions_on_levels_id"
   end
 
@@ -58,4 +59,3 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_132034) do
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "levels", column: "levels_id"
 end
-
