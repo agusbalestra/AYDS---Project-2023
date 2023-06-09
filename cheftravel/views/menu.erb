@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
+
   <title>ChefTravel</title>
-  <link rel="stylesheet" type="text/css" href="/arg.css">
-</head>
+ 
+  <link rel="stylesheet" type="text/css" href="arg.css"></head>
 <body>
 
 		<nav>
@@ -22,10 +24,46 @@
         <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/arg_png.png?raw=true">
       </div>
     </div>
+    
+<style>
+.button-link {
+  display: inline-block;
+  text-decoration: none;
+}
 
-<a href="http://localhost:4567/level/1"><button class=" buttonlevel1">Level 1</button>
-<a href="http://localhost:4567/level/2"><button class="buttonlevel2">Level 2</button>
-<a href="http://localhost:4567/level/3"><button class="buttonlevel3">Level 3</button>
-<a href="http://localhost:4567/level/1000"><button class="buttonlevel4">Frontera a Chile</button>
+.buttonlevel {
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 1000px;
+  cursor: pointer;
+}
+
+.buttonlevel span {
+  font-size: 15px; /* Tamaño de fuente reducido */
+  display: inline-block;
+  transform: scale(0.9); /* Escalar el texto al 80% del tamaño original */
+  transform-origin: center center; /* Establecer el origen de la transformación en el centro */
+}
+
+.buttonlevel:hover {
+  background-color: #02bac7;
+}
+  </style>
+
+
+<a href="http://localhost:4567/level/1" class="button-link">
+  <button class="buttonlevel"><span>Level 1</span></button>
+</a>
+<a href="http://localhost:4567/level/2" class="button-link">
+  <button class="buttonlevel"><span>Level 2</span></button>
+</a>
+<a href="http://localhost:4567/level/3" class="button-link">
+  <button class="buttonlevel"><span>Level 3</span></button>
+</a>
+<a href="http://localhost:4567/level/4" class="button-link">
+  <button class="buttonlevel"><span>Frontera a Chile</span></button>
+</a>
 </body>
 </html>
