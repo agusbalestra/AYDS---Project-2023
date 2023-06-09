@@ -1,0 +1,112 @@
+body {
+  background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/istockphoto-1368602102-612x612-Lue6FtJ5P-transformed.jpeg?raw=true");
+  background-size: cover;
+  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+img {
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+h1, h2, h3 {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+p, label, input[type="submit"] {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.question-container label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 60px;
+  background-color: #283238;
+  border-radius: 5px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.question-container input[type="radio"] {
+  display: none;
+}
+
+.question-container input[type="radio"]:checked + label {
+  background-color: #476b8f;
+  color: white;
+}
+
+.question-container input[type="radio"]:checked + label::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+.question-container label:hover {
+  background-color: #476b8f;
+}
+
+.question-container label:hover::before {
+  background-color: #fff;
+}
+
+input[type="submit"] {
+  background-color: #283238;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #476b8f;
+}
+
+.result-message {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.puntos-izq {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  transition: color 0.3s;
+}
+
+.nombre-der {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  transition: color 0.3s;
+}
+
+.puntos-izq:hover, .nombre-der:hover {
+  color: #05a1e6;
+}

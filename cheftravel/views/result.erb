@@ -1,66 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ChefTravel</title>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-</head>
-<body>
+  <head>
+    <title>ChefTravel</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/result.css">
+  </head>
 
-<style>
-  body {
-    background-image: linear-gradient(to right, #000b17, #000b17, #141452);
-    text-align: center;
-    padding: 10px;
-  }
+  <body>
+    <% if result_message == '¡CORRECTO!' %>
+      <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
+    <% else %>
+      <img src="https://storage.lacapitalmdp.com/2020/02/messienojado.jpg" border="1" width="300" height="200"> 
+    <% end %>
 
-  img {
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-
-  h1, h2, h3 {
-    font-family: 'Helvetica Neue', sans-serif;
-  }
-
-  p, label, input[type="submit"] {
-    font-family: 'Arial', sans-serif;
-  }
-
-  input[type="submit"] {
-    background-color: #f2f2f2;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-
-  .result-message {
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 50px;
-  }
-</style>
-
-
-<% if result_message == '¡CORRECTO!' %>
-  <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
-<% else %>
-  <img src="https://storage.lacapitalmdp.com/2020/02/messienojado.jpg" border="1" width="300" height="200"> 
-<% end %>
-
-<h2 class="result-message"><%= result_message %></h2>
-<p>Puntos actuales: <%=user.points.to_json%></p><br><br>
-<p>RESPUESTA CORRECTA:</p>
-<h3 class="correct_answer"><%= correct_answer.text %></h3>
-<h3 class="informed_text"><%= informed_text %></h2>
-<a href="http://localhost:4567/level/<%=id_level%>/question/<%=id_question+1%>"> <button>Siguiente pregunta!</button><br><br>
-  <a href="http://localhost:4567/menu"><button>Volver al menu</button><br><br>
-
-</body>
+    <h2 class="result-message"><%= result_message %></h2>
+    <p>Puntos actuales: <%=user.points.to_json%></p><br><br>
+    <p>RESPUESTA CORRECTA:</p>
+    <h3 class="correct_answer"><%= correct_answer.text %></h3>
+    <h3 class="informed_text"><%= informed_text %></h2>
+    <a href="http://localhost:4567/level/<%=id_level%>/question/<%=id_question+1%>"> <button>Siguiente pregunta!</button><br><br>
+    <a href="http://localhost:4567/menu"><button>Volver al menu</button><br><br>
+  </body>
 </html>

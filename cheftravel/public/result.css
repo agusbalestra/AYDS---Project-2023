@@ -1,0 +1,38 @@
+  body {
+    background-image: linear-gradient(to right, #000b17, #000b17, #141452);
+    text-align: center;
+    padding: 10px;
+  }
+
+  img {
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  p, label, input[type="submit"] {
+    font-family: 'Arial', sans-serif;
+  }
+
+  input[type="submit"] {
+    background-color: #f2f2f2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .result-message {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 50px;
+  }

@@ -1,10 +1,19 @@
+
 body {
-  margin: 0;
-  padding : 0;
-  background: url(https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/main/cheftravel/public/for_others/fondoLogin.jpeg) no-repeat center top;
+  background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/fondoLogin.jpeg?raw=true");
   background-size: cover;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  height: 100vh;
+  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+.centrar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.failmsg{
+  color: red;
 }
 
 .login-box {

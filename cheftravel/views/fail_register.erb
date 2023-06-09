@@ -2,28 +2,10 @@
 <html>
   <head>
     <title>ChefTravel</title>
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="/login.css">
   </head>
   <body>
-    <style>
-    .centrar {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .failmsg{
-      color: red;
-    }
-    body {
-      background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/fondoLogin.jpeg?raw=true");
-      background-size: cover;
-      color: #fff;
-      font-family: 'Helvetica Neue', sans-serif;
-      text-align: center;
-      padding: 10px;
-    }
 
-    </style>
     <br><br><br>
     
     <div class="login-box">
@@ -53,9 +35,9 @@
         <input type="password" name="reppw" placeholder="Repita su Contraseña">
 
         <input type="submit" value="Let's cook!">
-        <p class="failmsg"><%= msgfail %></p>
       </form>
         <a href="http://localhost:4567/"><input type="submit" value="Volver al login">
+        <p class="failmsg"><%= msgfail %></p>
     </div>
   </body>
 </html>

@@ -86,7 +86,7 @@ class App < Sinatra::Application
       user = current_user
       
       erb :menu, locals: {user: user}
-    else
+    else  #user not logued
       redirect '/'  
     end
   end
@@ -112,17 +112,28 @@ class App < Sinatra::Application
       question = Question.find_by(id: params[:id_question])
       
       #
-      if level.id == question.levels_id
-        answers = Answer.where(question_id: question.id)
-        user = current_user
-        
-        erb :question, locals: {level: level, question: question, answers: answers, user: user}
-################## HACER UN ERB NUEVO PARA LA FRONTERA ######################
+      if (question.present?)
+        if (level.id == question.levels_id)
+          answers = Answer.where(question_id: question.id)
+          user = current_user
+          
+          if level.id < 1000
+            erb :question, locals: {level: level, question: question, answers: answers, user: user}
+          else
+            if user.points > 120
+              erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
+            else
+              redirect '/menu'
+            end
+          end
+        else
+          redirect '/menu'
+        end
       else
         redirect '/menu'
       end
 
-    else # else si no encuentra usuario
+    else # user not logued
       redirect '/'  
     end
   end
@@ -130,16 +141,16 @@ class App < Sinatra::Application
   post '/question' do
     if current_user.present?
       
+      question = Question.find(params[:question_id])
       option_id = params[:option_id].to_i
       
       if option_id == 0 # si el usuario no seleciona una respuesta 
         
-        redirect "/question/#{params[:question_id]}"
+        redirect "/level/#{question.levels_id}/question/#{question.id}"
       
       else # si el usuario selecciona una respuesta 
 
         option = Answer.find(option_id)
-        question = Question.find(params[:question_id])
         user = current_user
         informed_text = question.informed_text
         correct_answer = question.answers.find_by(correct: true)
@@ -167,7 +178,7 @@ class App < Sinatra::Application
         erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user, informed_text: informed_text, correct_answer: correct_answer}
       end
 
-    else # else de si el usuario no está logueado
+    else # user not logued
       redirect '/'
     end
     
