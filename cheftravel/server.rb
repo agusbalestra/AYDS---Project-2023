@@ -140,6 +140,8 @@ class App < Sinatra::Application
         option = Answer.find(option_id)
         question = Question.find(params[:question_id])
         user = current_user
+        informed_text = question.informed_text
+        correct_answer = question.answers.find_by(correct: true)
 
         if option.correct
           result_message = "¡CORRECTO!"
@@ -161,7 +163,7 @@ class App < Sinatra::Application
           end
         end
 
-        erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user}
+        erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user, informed_text: informed_text, correct_answer: correct_answer}
       end
 
     else # else de si el usuario no está logueado

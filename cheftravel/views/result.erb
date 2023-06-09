@@ -56,6 +56,9 @@
 
 <h2 class="result-message"><%= result_message %></h2>
 <p>Puntos actuales: <%=user.points.to_json%></p><br><br>
+<p>RESPUESTA CORRECTA:</p>
+<h3 class="correct_answer"><%= correct_answer.text %></h3>
+<h3 class="informed_text"><%= informed_text %></h2>
 <a href="http://localhost:4567/level/<%=id_level%>/question/<%=id_question+1%>"> <button>Siguiente pregunta!</button><br><br>
   <a href="http://localhost:4567/menu"><button>Volver al menu</button><br><br>
 
