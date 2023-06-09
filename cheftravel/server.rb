@@ -117,6 +117,7 @@ class App < Sinatra::Application
         user = current_user
         
         erb :question, locals: {level: level, question: question, answers: answers, user: user}
+################## HACER UN ERB NUEVO PARA LA FRONTERA ######################
       else
         redirect '/menu'
       end
