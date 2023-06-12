@@ -49,7 +49,9 @@
           <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/arg_png.png?raw=true">
         </div>
       </div>
-      
+      <div id="imagen">
+        <img src="https://github.com/eabalestra/AYDS-Project-2023/chile.png?raw=true">
+      </div>
 
 
     <a href="http://localhost:4567/level/1" class="button-link">
@@ -64,5 +66,16 @@
     <a href="http://localhost:4567/level/1000" class="button-link">
     <button class="buttonlevel"><span>Frontera a Chile</span></button>
     </a>
+
+    <script>
+      var imagen = document.getElementById("imagen");
+      // Muestra u oculta la imagen según la condición
+      if (<%= user.points%> > 120) {
+        imagen.style.display = "block"; // Muestra la imagen
+      } else {
+        imagen.style.display = "none"; // Oculta la imagen
+      }
+    </script>
+
   </body>
 </html>
