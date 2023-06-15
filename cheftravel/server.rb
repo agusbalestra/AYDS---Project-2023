@@ -10,9 +10,6 @@ require_relative 'models/answer'
 require_relative 'models/level'
 require_relative 'models/recipe'
 
-
-set :database, { adapter: "sqlite3", database: "db.sqlite3" }
-
 class App < Sinatra::Application
   
   enable :sessions
