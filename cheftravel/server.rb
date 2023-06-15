@@ -142,7 +142,7 @@ class App < Sinatra::Application
           if level.id < 1000
             erb :question, locals: {level: level, question: question, answers: answers, user: user}
           else
-            if user.points > 120
+            if user.points > 500
               erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
             else
               redirect '/menu'
