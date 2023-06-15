@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
     else
       self.points += 30
     end
-    self.update(points: self.points)
   end
 
   def rest_points (question)
@@ -23,7 +22,6 @@ class User < ActiveRecord::Base
     else
       self.points -= 30
     end
-    self.update(points: self.points)
   end
 
 end
