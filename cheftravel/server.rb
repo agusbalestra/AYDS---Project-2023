@@ -108,7 +108,6 @@ class App < Sinatra::Application
     end
   end
 
-
   get '/ranking' do
     usersname = User.select(:name).order(points: :desc)
     userspoints = User.select(:points).order(points: :desc)
@@ -175,22 +174,10 @@ class App < Sinatra::Application
 
         if option.correct
           result_message = "¡CORRECTO!"
-          if question.difficulty.to_i == 1
-            user.update(points: user.points.to_i + 10)
-          elsif question.difficulty.to_i == 2
-            user.update(points: user.points.to_i + 20)
-          else
-            user.update(points: user.points.to_i + 30)
-          end
+          user.sum_points(question)
         else 
           result_message = "INCORRECTO"
-          if question.difficulty.to_i == 1
-            user.update(points: user.points.to_i - 10)
-          elsif question.difficulty.to_i == 2
-            user.update(points: user.points.to_i - 20)
-          else
-            user.update(points: user.points.to_i - 30)
-          end
+          user.rest_points(question)
         end
 
         erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user, informed_text: informed_text, correct_answer: correct_answer}
