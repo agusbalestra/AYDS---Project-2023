@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>ChefTravel - Argentina</title>
+
+  <link rel="stylesheet" type="text/css" href="/arg.css"></head>
+  <body>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="http://localhost:4567/menu">Menú</a></li>
+        <li><a href="#">Recetario</a></li>
+        <li><a href="http://localhost:4567/ranking">Ranking</a></li>
+        <li><a href="http://localhost:4567/profile"><%= user.name%></a></li>
+        <li><a>Puntos: <%= user.points.to_json%></a></li>
+        <li><a href="http://localhost:4567/logout">Logout</a></li>
+      </ul>
+    </nav>
+
+    <div id="contenedor">
+      <div class="banner_img" >
+        <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/arg_png.png?raw=true">
+      </div>
+    </div>
+  
+    <a href="http://localhost:4567/level/1" class="button-link">
+    <button class="buttonlevel"><span>Level 1</span></button>
+    </a>
+    <a href="http://localhost:4567/level/2" class="button-link">
+    <button class="buttonlevel"><span>Level 2</span></button>
+    </a>
+    <a href="http://localhost:4567/level/3" class="button-link">
+    <button class="buttonlevel"><span>Level 3</span></button>
+    </a>
+    <a href="http://localhost:4567/level/1000" class="button-link">
+    <button class="buttonlevel"><span>Frontera a Chile</span></button>
+    </a>
+
+  </body>
+</html>

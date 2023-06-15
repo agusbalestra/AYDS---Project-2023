@@ -4,7 +4,8 @@
 }
 
 body {
-  background-image: url("https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/fondoparamenu.jpg?raw=true");
+  background: rgb(27,106,167);
+  background: radial-gradient(circle, rgba(27,106,167,1) 0%, rgba(40,159,233,1) 61%);
   background-size: cover;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
@@ -29,13 +30,9 @@ body {
   display: block;
 }
 
-
-nav {
-  background-color: #333;
-}
-
+/* menu de arriba */
 .menu {
-
+  background: rgb(29, 113, 165);
   list-style-type: none;
   display: flex;
   justify-content: center;
@@ -54,14 +51,37 @@ nav {
 }
 
 .menu li a:hover {
-  background-color: #555;
+  background-color: rgb(12, 129, 176);
   border-radius: 5px;
 }
 
+/* botones de levels*/
+.button-link {
+  display: inline-block;
+  text-decoration: none;
+}
 
+.buttonlevel {
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 1000px;
+  cursor: pointer;
+}
 
+.buttonlevel span {
+  font-size: 15px;
+  display: inline-block;
+  transform: scale(0.9);
+  transform-origin: center center;
+}
 
+.buttonlevel:hover {
+  background-color: #02bac7;
+}
 
+/* argentina flotante */
 @keyframes movimiento {
   0%{
     transform: translateY(0);
