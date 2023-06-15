@@ -1,36 +1,4 @@
-*{
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  background: rgb(27,106,167);
-  background: radial-gradient(circle, rgba(27,106,167,1) 0%, rgba(40,159,233,1) 61%);
-  background-size: cover;
-  color: #fff;
-  font-family: 'Helvetica Neue', sans-serif;
-  text-align: center;
-  padding: 10px;
-}
-
-.contenedor{
-  position: relative;
-  display: inline-block;
-  float: center
-}
-
-.banner_img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: movimiento 5.5s linear infinite;
-}
-
-.banner_img img{
-  width: 680px;
-  height: 680px;
-  display: block;
-}
 
 /* menu de arriba */
 .menu {
@@ -57,44 +25,91 @@ body {
   border-radius: 5px;
 }
 
-/* botones de levels*/
-.button-link {
-  display: inline-block;
-  text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.buttonlevel {
+body {
+  background: rgb(27,106,167);
+  background: radial-gradient(circle, rgba(27,106,167,1) 0%, rgba(40,159,233,1) 61%);
+  background-size: cover;
+  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+
+#contenedor {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner_img img {
+  width: 680px;
+  height: 680px;
+  display: block;
+}
+
+.pin {
+  background: #dcdee6;
   position: absolute;
-  padding: 10px 20px;
-  background-color: #000000;
-  color: #ffffff;
-  border: none;
-  border-radius: 1000px;
-  cursor: pointer;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
 }
 
-.buttonlevel span {
-  font-size: 15px;
+.pin::before {
+  content: '';
+  background: #39c027;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: pulse 1.3s ease-in-out infinite;
+}
+
+.pin span {
   display: inline-block;
-  transform: scale(0.9);
-  transform-origin: center center;
+  white-space: nowrap;
+  position: absolute;
+  left: 1.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  border-radius: 3em;
+  padding: 0.3em 0.6em;
+  font-size: 0.9em;
 }
 
-.buttonlevel:hover {
-  background-color: #02bac7;
+.level1 {
+  top: 30%;
+  left: 45%;
 }
 
-/* argentina flotante */
-@keyframes movimiento {
-  0%{
-    transform: translateY(0);
-  }
-  50%{
-    transform: translateY(10px);
-  }
-  100%{
-    transform: translateY(0);
-  }
+.level2 {
+  top: 45%;
+  left: 25%;
+}
 
-  
+.level3 {
+  top: 55%;
+  left: 25%;
+}
+
+.fronteraChile {
+  top: 35%;
+  left: 35%;
+}
+
+@keyframes pulse {
+  100% {
+    opacity: 0;
+    transform: translate(-50%,-50%) scale(2.5);
+  }
 }
