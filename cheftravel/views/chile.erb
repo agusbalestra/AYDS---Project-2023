@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>ChefTravel - Chile</title>
+
+  <link rel="stylesheet" type="text/css" href="/pais.css"></head>
+  <body>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="http://localhost:4567/menu">Menú</a></li>
+        <li><a href="#">Recetario</a></li>
+        <li><a href="http://localhost:4567/ranking">Ranking</a></li>
+        <li><a href="http://localhost:4567/profile"><%= user.name%></a></li>
+        <li><a>Puntos: <%= user.points.to_json%></a></li>
+        <li><a href="http://localhost:4567/logout">Logout</a></li>
+      </ul>
+    </nav>
+
+    <div id="contenedor">
+      <div class="banner_img" >
+        <img src="https://raw.githubusercontent.com/eabalestra/AYDS-Project-2023/main/cheftravel/public/for_others/chile.png">
+      </div>
+    </div>
+
+  </body>
+</html>

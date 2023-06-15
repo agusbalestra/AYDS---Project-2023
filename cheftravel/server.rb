@@ -98,6 +98,16 @@ class App < Sinatra::Application
     end
   end
 
+  get '/chile' do
+    if current_user.present?
+      user = current_user
+
+      erb :chile, locals: {user: user}
+    else #user not logued
+      redirect '/'  
+    end
+  end
+
 
   get '/ranking' do
     usersname = User.select(:name).order(points: :desc)
