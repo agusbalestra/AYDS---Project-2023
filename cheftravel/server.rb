@@ -109,10 +109,15 @@ class App < Sinatra::Application
   end
 
   get '/ranking' do
-    usersname = User.select(:name).order(points: :desc)
-    userspoints = User.select(:points).order(points: :desc)
+    if current_user.present?
+      user = current_user
+      usersname = User.select(:name).order(points: :desc)
+      userspoints = User.select(:points).order(points: :desc)
 
-    erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints}
+      erb erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints, user: user}
+    else #user not logued
+      redirect '/'  
+    end
   end
 
   get '/level/:id_level' do
