@@ -13,7 +13,9 @@ body {
   padding: 10px;
 }
 
-#contenedor{
+.contenedor{
+  position: relative;
+  display: inline-block;
   float: center
 }
 
@@ -62,6 +64,7 @@ body {
 }
 
 .buttonlevel {
+  position: absolute;
   padding: 10px 20px;
   background-color: #000000;
   color: #ffffff;
