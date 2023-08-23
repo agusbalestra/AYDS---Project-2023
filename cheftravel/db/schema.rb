@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
     t.string "firstname"
     t.string "lastname"
     t.string "email"
-    t.integer "points"
+    t.integer "points", default: 0
   end
 
   add_foreign_key "answers", "questions"
