@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 4, too_short: "te queres ir hackeado?" }
   
   validate :password_match
+  after_initialize :set_default_points
 
   attr_accessor :reppw
 
@@ -11,6 +12,10 @@ class User < ActiveRecord::Base
     if password != reppw
       errors.add(:password_confirmation, "debe coincidir con la contraseña")
     end
+  end
+
+  def set_default_points
+    self.points ||= 0
   end
 
   def sum_points(question)

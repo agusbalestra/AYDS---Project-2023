@@ -63,4 +63,55 @@ describe User do
     expect(user).not_to be_valid
   end
 
+  #TESTS for points tratament
+  it "updates points with a question of difficulty 1" do
+    user = User.new(name: "colo", email: "colobarco@gmail.com", password: "aguanteboca123")
+    user.reppw = "aguanteboca123"
+    question = double("¿Cual es el manjar tipico de Argentina?", difficulty: 1)
+    user.sum_points(question)
+    expect(user.points).to eq(10)
+  end
+
+  it "updates points with a question of difficulty 2" do
+    user = User.new(name: "lucasjanson", email: "jansonson@mail.com", password: "bocaaaaa12")
+    user.reppw = "bocaaaaa12"
+    question = double("¿Qué tipo de madera es tradicionalmente utilizada para el fuego del asado?", difficulty: 2)
+    user.points = 100
+    user.sum_points(question)
+    expect(user.points).to eq(120)
+  end
+
+  it "updates points with a question of difficulty 3" do
+    user = User.new(name: "Carlos", email: "apache@mail.com", password: "bocaaaaa12")
+    user.reppw = "bocaaaaa12"
+    question = double("¿Qué rol cumple la vainilla en su preparación?", difficulty: 3)
+    user.sum_points(question)
+    expect(user.points).to eq(30)
+  end
+
+  it "updates points negatively with a question of difficulty 1" do
+    user = User.new(name: "hamburguesitafabra", email: "ffabra@example.com", password: "liberenAlPanitaVilla123")
+    user.reppw = "liberenAlPanitaVilla123"
+    question = double("¿Cuáles son los ingredientes para preparar dulce de leche?", difficulty: 1)
+    user.rest_points(question)
+    expect(user.points).to eq(-10)
+  end
+
+  it "updates points negatively with a question of difficulty 2" do
+    user = User.new(name: "javiGODcia", email: "javmanco1@mail.com", password: "aBreyLeFaltaTodavia123")
+    user.reppw = "aBreyLeFaltaTodavia123"
+    question = double("¿Cuál es el proceso principal para lograr un buen asado argentino?", difficulty: 2)
+    user.rest_points(question)
+    expect(user.points).to eq(-20)
+  end
+
+  it "updates points negatively with a question of difficulty 3" do
+    user = User.new(name: "Roncaglia", email: "troncaglia2@mail.com", password: "oPasaLaPelotaoPasaElJugador")
+    user.reppw = "oPasaLaPelotaoPasaElJugador"
+    user.points = 100
+    question = double("¿Por qué el Dulce de Leche se debe revolver constantemente durante su preparación?", difficulty: 3)
+    user.rest_points(question)
+    expect(user.points).to eq(100-30)
+  end
+
 end
