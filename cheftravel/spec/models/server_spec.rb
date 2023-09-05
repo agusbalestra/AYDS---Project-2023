@@ -25,14 +25,19 @@ RSpec.describe 'Sinatra App' do
     expect(last_response.status).to eq(404)
   end
 
-  it 'testing arg' do
-    post '/logmenu', {name: "carlitos", password: "boquita"}
-    get '/arg'
+  it 'testing menu no credentials' do
+    get '/menu'
+    expect(last_response.status).to eq(302)
+  end
+
+  it 'testing menu' do
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+    get '/menu'
     expect(last_response.status).to eq(200)
   end
 
   it 'testing chile' do
-    post '/logmenu', {name: "romanino", password: "avostegusta?"}
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
     get '/chile'
     expect(last_response.status).to eq(200)
   end
