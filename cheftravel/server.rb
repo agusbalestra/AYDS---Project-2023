@@ -11,7 +11,7 @@ require_relative 'models/level'
 require_relative 'models/recipe'
 
 class App < Sinatra::Application
-  
+
   enable :sessions
   register Sinatra::Cookies
 
@@ -25,7 +25,7 @@ class App < Sinatra::Application
     end
   end
 
-  ## 
+  ##
   get '/' do
     erb :index
   end
@@ -40,7 +40,7 @@ class App < Sinatra::Application
 
     user = User.new(params)
     if user.valid?
-      user.points = 0
+      user.set_default_points
       user.save
       session[:user_id] = user.id
       erb :menu, locals: { user: user }
@@ -48,7 +48,7 @@ class App < Sinatra::Application
       erb :fail_register, locals: { msgfail: user.errors.full_messages }
     end
   end
-  
+
 
   ## LOGMENU
   post '/logmenu' do
@@ -85,7 +85,7 @@ class App < Sinatra::Application
 
   get '/ranking' do
     user = current_user
-    usersname = User.select(:name).order(points: :desc)
+    usersname = User.select(:name, :points).order(points: :desc)
     userspoints = User.select(:points).order(points: :desc)
 
     erb erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints, user: user}
@@ -105,12 +105,12 @@ class App < Sinatra::Application
     if current_user.present?
       level = Level.find_by(id: params[:id_level])
       question = Question.find_by(id: params[:id_question])
-      
+
       if (question.present?)
         if (level.id == question.levels_id)
           answers = Answer.where(question_id: question.id)
           user = current_user
-          
+
           if level.id < 1000
             erb :question, locals: {level: level, question: question, answers: answers, user: user}
           else
@@ -128,20 +128,20 @@ class App < Sinatra::Application
       end
 
     else # user not logued
-      redirect '/'  
+      redirect '/'
     end
   end
 
 
-  post '/question' do      
+  post '/question' do
     question = Question.find(params[:question_id])
     option_id = params[:option_id].to_i
-    
-    if option_id == 0 # si el usuario no seleciona una respuesta 
-      
+
+    if option_id == 0 # si el usuario no seleciona una respuesta
+
       redirect "/level/#{question.levels_id}/question/#{question.id}"
-    
-    else # si el usuario selecciona una respuesta 
+
+    else # si el usuario selecciona una respuesta
 
       option = Answer.find(option_id)
       user = current_user
@@ -151,7 +151,7 @@ class App < Sinatra::Application
       if option.correct
         result_message = "¡CORRECTO!"
         user.sum_points(question)
-      else 
+      else
         result_message = "INCORRECTO"
         user.rest_points(question)
       end
@@ -160,7 +160,7 @@ class App < Sinatra::Application
     end
   end
 
-  
+
   get '/logout' do
     session.clear   # Elimina todos los datos de la sesión
     redirect '/'    # Redirige al usuario a la página de inicio
@@ -170,8 +170,8 @@ class App < Sinatra::Application
   ## PROFILE
   get '/profile' do
     if current_user.present?
-      
-      
+
+
       erb :profile
     else
       redirect '/'
@@ -179,12 +179,12 @@ class App < Sinatra::Application
   end
 
   post '/profile' do
-    
+
   end
 
   ## METHODS
   def current_user
     User.find_by(id: session[:user_id])
   end
-  
+
 end
