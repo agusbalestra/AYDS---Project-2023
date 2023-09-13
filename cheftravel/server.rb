@@ -140,25 +140,35 @@ class App < Sinatra::Application
     if option_id == 0 # si el usuario no seleciona una respuesta 
       
       redirect "/level/#{question.levels_id}/question/#{question.id}"
-    
+      
     else # si el usuario selecciona una respuesta 
 
-      option = Answer.find(option_id)
+      selected_option = Answer.find(option_id)
       user = current_user
-      informed_text = question.informed_text
-      correct_answer = question.answers.find_by(correct: true)
-
-      if option.correct
-        result_message = "¡CORRECTO!"
-        user.sum_points(question)
-      else 
-        result_message = "INCORRECTO"
-        user.rest_points(question)
-      end
-
-      erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user, informed_text: informed_text, correct_answer: correct_answer}
+      user.points_treatment(selected_option.correct, question.difficulty)
+      
+      selected_option.correct ? correct = "correct" : correct = "incorrect"
+      redirect "/#{correct}?question=#{question.id}"
     end
   end
+
+
+  get '/correct' do
+    question_id = params[:question]
+
+    question = Question.find(question_id)
+
+    erb :result, locals: { result_message: "¡CORRECTO!", user: current_user, id_question: question.id , id_level: question.levels_id, informed_text: question.informed_text}
+  end
+
+  get '/incorrect' do
+    question_id = params[:question]
+
+    question = Question.find(question_id)
+
+    erb :result, locals: { result_message: "¡INCORRECTO!", id_question: question.id , id_level: question.levels_id, user: current_user, informed_text: question.informed_text, correct_answer: question.answers.find_by(correct: true)}
+  end
+
 
   
   get '/logout' do
