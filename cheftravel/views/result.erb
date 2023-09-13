@@ -7,18 +7,23 @@
   </head>
 
   <body>
-    <% if result_message == '¡CORRECTO!' %>
-      <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
-    <% else %>
-      <img src="https://storage.lacapitalmdp.com/2020/02/messienojado.jpg" border="1" width="300" height="200"> 
-    <% end %>
 
     <h2 class="result-message"><%= result_message %></h2>
+
+    <% if result_message == '¡CORRECTO!' %>
+      <img src="https://github.com/eabalestra/AYDS-Project-2023/blob/main/cheftravel/public/for_others/2484664.jpg?raw=true" border="1" width="300" height="200">
+    
+    <% else %>
+      <img src="https://storage.lacapitalmdp.com/2020/02/messienojado.jpg" border="1" width="300" height="200"> 
+      <p>RESPUESTA CORRECTA:</p>
+      <h2 class="correct_answer"><%= correct_answer.text %></h2>
+    <% end %>
+    
     <p>Puntos actuales: <%=user.points.to_json%></p><br><br>
-    <p>RESPUESTA CORRECTA:</p>
-    <h3 class="correct_answer"><%= correct_answer.text %></h3>
-    <h3 class="informed_text"><%= informed_text %></h2>
-    <a href="http://localhost:4567/level/<%=id_level%>/question/<%=id_question+1%>"> <button>Siguiente pregunta!</button><br><br>
+    <h3 class="informed_text"><%= informed_text %></h3>
+    <a href="http://localhost:4567/level/<%=id_level%>/question/<%=id_question+1%>"><button>Siguiente pregunta</button>
+    <br><br>
     <a href="http://localhost:4567/menu"><button>Volver al menu</button><br><br>
+
   </body>
 </html>

@@ -18,26 +18,37 @@ class User < ActiveRecord::Base
     self.points ||= 0
   end
 
-  def sum_points(question)
-    if question.difficulty.to_i == 1
-      self.points += 10
-    elsif question.difficulty.to_i == 2
-      self.points += 20
+  def points_treatment(correct, diff)
+    if correct
+      self.sum_points(diff)
     else
-      self.points += 30
+      self.rest_points(diff)
     end
-    self.update(points: self.points)
+  end
+
+
+  def sum_points(diff)
+    new_points = self.points
+    if (diff == 1)
+      new_points += 10
+    elsif (diff == 2)
+      new_points += 20
+    elsif (diff == 3)
+      new_points += 30 
+    end
+    self.update_attribute :points, new_points
   end
   
-  def rest_points(question)
-    if question.difficulty.to_i == 1
-      self.points -= 10
-    elsif question.difficulty.to_i == 2
-      self.points -= 20
-    else
-      self.points -= 30
+  def rest_points(diff)
+    new_points = self.points
+    if (diff == 1)
+      new_points -= 10
+    elsif (diff == 2)
+      new_points -= 20
+    elsif (diff == 3)
+      new_points += 30 
     end
-    self.update(points: self.points)
+    self.update_attribute :points, new_points
   end
 
 end
