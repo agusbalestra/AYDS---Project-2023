@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_161840) do
   create_table "answers", force: :cascade do |t|
     t.string "text"
     t.boolean "correct", default: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
     t.datetime "updated_at", null: false
     t.integer "question_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "correct_questions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_correct_questions_on_question_id"
+    t.index ["user_id"], name: "index_correct_questions_on_user_id"
   end
 
   create_table "levels", force: :cascade do |t|
@@ -32,11 +41,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
     t.integer "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "answer_id"
     t.string "link_imagen"
     t.integer "levels_id"
     t.string "informed_text"
-    t.index ["answer_id"], name: "index_questions_on_answer_id"
     t.index ["levels_id"], name: "index_questions_on_levels_id"
   end
 
@@ -48,10 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_230936) do
     t.string "firstname"
     t.string "lastname"
     t.string "email"
-    t.integer "points"
+    t.integer "points", default: 0
+    t.integer "current_level", default: 0
   end
 
   add_foreign_key "answers", "questions"
-  add_foreign_key "questions", "answers"
+  add_foreign_key "correct_questions", "questions"
+  add_foreign_key "correct_questions", "users"
   add_foreign_key "questions", "levels", column: "levels_id"
 end

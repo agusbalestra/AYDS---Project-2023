@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
   <head>
-    <title>Chef-RANKING</title>
-    <link rel="stylesheet" type="text/css" href="/ranking.css"></head>
+    <title>RecipeBook - ChefTravel</title>
+    <link rel="stylesheet" type="text/css" href="/recipebook.css"></head>
   </head>
   
   <body>
@@ -19,31 +19,18 @@
 
     <main class="table">
       <section class="table__header">
-        <h1>CHEF-RANKING</h1>
+        <h1>Mi Recetario</h1>
       </section>
       <section class="table__body">
         <table>
-          <thead>
-            <tr>
-              <tr>
-                <th>Posición</th>
-                <th>Jugador</th>
-                <th>Puntos</th>
-              </tr>
-            </tr>
-          </thead>
           <tbody>
-            <% userspoints.each_with_index do |user, index| %>
-              <% if index < 10 %>
-                <tr>
-                  <td><%= index + 1 %></td>
-                  <td><%= usersname[index].name %></td>
-                  <td><%= user.points %></td>
-                </tr>
-              <% else %>
-                <% break %>
-              <% end %>
+          <% if levels.empty? %>
+            <h2>No tienes recetas aun</h2>
+          <% else %>
+            <% levels.each do |level| %>
+                <a href="http://localhost:4567/recipe-book/<%=level.id%>"><p><%= level.name %></p>
             <% end %>
+          <% end %>
           </tbody>
         </table>
       </section>
