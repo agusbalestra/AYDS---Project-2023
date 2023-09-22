@@ -9,6 +9,7 @@ require_relative 'models/user'
 require_relative 'models/answer'
 require_relative 'models/level'
 require_relative 'models/recipe'
+require_relative 'models/correct_questions'
 
 class App < Sinatra::Application
 
@@ -40,7 +41,6 @@ class App < Sinatra::Application
 
     user = User.new(params)
     if user.valid?
-      user.set_default_points
       user.save
       session[:user_id] = user.id
       erb :menu, locals: { user: user }
@@ -88,7 +88,7 @@ class App < Sinatra::Application
     usersname = User.select(:name, :points).order(points: :desc)
     userspoints = User.select(:points).order(points: :desc)
 
-    erb erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints, user: user}
+    erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints, user: user}
   end
 
 
@@ -114,7 +114,7 @@ class App < Sinatra::Application
           if level.id < 1000
             erb :question, locals: {level: level, question: question, answers: answers, user: user}
           else
-            if user.points > 170
+            if user.current_level >= 3
               erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
             else
               redirect '/menu'
@@ -145,7 +145,11 @@ class App < Sinatra::Application
 
       selected_option = Answer.find(option_id)
       user = current_user
-      user.points_treatment(selected_option.correct, question.difficulty)
+
+      unless CorrectQuestions.exists?(question_id: question.id, user_id: user.id) # para que no sume puntos si ya contesto esa pregunta
+        CorrectQuestions.create(question_id: question.id, user_id: user.id)
+        user.points_treatment(selected_option.correct, question.difficulty)
+      end
       
       selected_option.correct ? correct = "correct" : correct = "incorrect"
       redirect "/#{correct}?question=#{question.id}"
@@ -173,6 +177,28 @@ class App < Sinatra::Application
   get '/logout' do
     session.clear   # Elimina todos los datos de la sesión
     redirect '/'    # Redirige al usuario a la página de inicio
+  end
+
+  get '/recipe-book' do
+    max_lv = current_user.current_level
+    levels = []
+
+    if(max_lv != 0)
+      for i in(1..max_lv)
+        lv = Level.find(i)
+        levels << lv
+      end
+    end
+
+    erb :recipebook, locals: {user: current_user,  levels: levels}
+  end
+
+  get '/recipe-book/:id_level' do
+
+    lv = Level.find( params[:id_level])
+
+
+    erb :recipe, locals: {level: lv, user: current_user}
   end
 
 
