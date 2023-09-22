@@ -12,6 +12,7 @@ require_relative 'models/user'
 require_relative 'models/answer'
 require_relative 'models/level'
 require_relative 'models/recipe'
+require_relative 'models/correct_questions'
 
 # Server for app
 class App < Sinatra::Application
@@ -39,7 +40,6 @@ class App < Sinatra::Application
   post '/registermenu' do
     user = User.new(params)
     if user.valid?
-      user.set_default_points
       user.save
       session[:user_id] = user.id
       erb :menu, locals: { user: user }
@@ -97,37 +97,51 @@ class App < Sinatra::Application
       level = Level.find_by(id: params[:id_level])
       question = Question.find_by(id: params[:id_question])
 
-      if question.present?
-        if level.id == question.levels_id
+      if (question.present?)
+        if (level.id == question.levels_id)
           answers = Answer.where(question_id: question.id)
           user = current_user
 
           if level.id < 1000
-            erb :question, locals: { level: level, question: question, answers: answers, user: user }
-          elsif user.points > 170
-            erb :frontera, locals: { level: level, question: question, answers: answers, user: user }
+            erb :question, locals: {level: level, question: question, answers: answers, user: user}
           else
-            redirect '/menu'
+            if user.current_level >= 3
+              erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
+            else
+              redirect '/menu'
+            end
           end
+        else
+          redirect '/menu'
         end
       else
         redirect '/menu'
       end
-    else
-      redirect '/menu'
+
+    else # user not logued
+      redirect '/'
     end
   end
 
   post '/question' do
     question = Question.find(params[:question_id])
     option_id = params[:option_id].to_i
-    if option_id.zero? # si el usuario no seleciona una respuesta
+
+    if option_id == 0 # si el usuario no seleciona una respuesta
+
       redirect "/level/#{question.levels_id}/question/#{question.id}"
-    else # si el usuario selecciona una respuesta
+      
+    else # si el usuario selecciona una respuesta 
+
       selected_option = Answer.find(option_id)
       user = current_user
-      user.points_treatment(selected_option.correct, question.difficulty)
-      selected_option.correct ? correct = 'correct' : correct = 'incorrect'
+
+      unless CorrectQuestions.exists?(question_id: question.id, user_id: user.id) # para que no sume puntos si ya contesto esa pregunta
+        CorrectQuestions.create(question_id: question.id, user_id: user.id)
+        user.points_treatment(selected_option.correct, question.difficulty)
+      end
+      
+      selected_option.correct ? correct = "correct" : correct = "incorrect"
       redirect "/#{correct}?question=#{question.id}"
     end
   end
@@ -162,7 +176,30 @@ class App < Sinatra::Application
     redirect '/'    # Redirige al usuario a la página de inicio
   end
 
-  # PROFILE
+  get '/recipe-book' do
+    max_lv = current_user.current_level
+    levels = []
+
+    if(max_lv != 0)
+      for i in(1..max_lv)
+        lv = Level.find(i)
+        levels << lv
+      end
+    end
+
+    erb :recipebook, locals: {user: current_user,  levels: levels}
+  end
+
+  get '/recipe-book/:id_level' do
+
+    lv = Level.find( params[:id_level])
+
+
+    erb :recipe, locals: {level: lv, user: current_user}
+  end
+
+
+  ## PROFILE
   get '/profile' do
     user = current_user
     total_questions = Question.count
