@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Profile</title>
+  <link rel="stylesheet" type="text/css" href="/update_profile.css"></head>
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="http://localhost:4567/menu">Menú</a></li>
+      <li><a href="#">Recetario</a></li>
+      <li><a href="http://localhost:4567/ranking">Ranking</a></li>
+      <li><a href="http://localhost:4567/profile"><%= user.name%></a></li>
+      <li><a>Puntos: <%= user.points.to_json%></a></li>
+      <li><a href="http://localhost:4567/logout">Logout</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Update Profile</h1>
+  <% if flash[:error] %>
+    <div class="error">
+      <ul>
+        <li><%= flash[:error] %></li>
+      </ul>
+    </div>
+  <% end %>
+
+  <form action="/update_profile" method="post">
+    <!-- Name -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name""><br>
+
+
+    <!-- Email -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+
+    <!-- Current Password -->
+    <label for="current_password">Current Password:</label>
+    <input type="password" id="current_password" name="current_password"><br>
+
+    <!-- New Password -->
+    <label for="password">New Password:</label>
+    <input type="password" id="password" name="password"><br>
+
+    <!-- Password Confirmation -->
+    <label for="password_confirmation">Confirm New Password:</label>
+    <input type="password" id="password_confirmation" name="password_confirmation"><br>
+    
+    <input type="submit" value="Update">
+  </form>
+</body>
+</html>
