@@ -5,6 +5,7 @@ require 'sinatra/activerecord'
 require 'sinatra/reloader'
 require 'sinatra/cookies'
 require 'bundler/setup'
+require 'sinatra/flash'
 
 require_relative 'models/question'
 require_relative 'models/user'
@@ -21,7 +22,7 @@ class App < Sinatra::Application
     super()
   end
 
-  before ['/menu', '/arg', '/chile', '/ranking', '/level', '/question', '/correct', '/incorrect', '/profile'] do
+  before ['/menu', '/arg', '/chile', '/ranking', '/level', '/question', '/correct', '/incorrect', '/profile', '/update_profile'] do
     redirect '/' unless current_user.present?
   end
 
@@ -173,9 +174,37 @@ class App < Sinatra::Application
   end
 
   get '/update_profile' do
-    
+    erb :update_profile, locals: { user: current_user, errors: [] }
+  end
 
-    erb :update_profile
+  post '/update_profile' do
+    user = current_user
+    new_username = params[:name]
+    current_pass = params[:current_password]
+    new_password = params[:password]
+    new_pass_confirm = params[:password_confirmation]
+    new_email = params[:email]
+    user.name = new_username
+    user.password = new_password
+    user.email = new_email
+
+    if new_username != '' && !User.find_by(name: new_username).nil?
+      flash[:error] = 'Name is not valid.'
+    elsif new_password != '' && current_pass.nil?
+      flash[:error] = 'Please provide your current password.'
+    elsif new_password != new_pass_confirm
+      flash[:error] = 'New password and confirmation do not match.'
+    elsif new_email != '' && !User.find_by(email: new_email).nil?
+      flash[:error] = 'Email is not valid.'
+    else
+      user.update_column(:name, new_username) if new_username != ''
+      user.update_column(:password, new_password) if new_password != '' && current_pass != ''
+      user.update_column(:email, new_email) if new_email != ''
+
+      redirect '/profile' if user.save
+    end
+
+    erb :update_profile, locals: { user: current_user }
   end
 
   def current_user
