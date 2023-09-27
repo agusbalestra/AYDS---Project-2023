@@ -21,6 +21,42 @@ RSpec.describe 'Sinatra App' do
     expect(last_response.status).to eq(200)
   end
 
+  it 'testing arg' do
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+    get '/arg'
+    expect(last_response.status).to eq(200)
+  end
+
+  it 'testing ranking' do
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+    get '/ranking'
+    expect(last_response.status).to eq(200)
+  end
+
+  it 'testing /level/:id_level redirect' do
+    user = { name: "colo", password: "aguanteboca123" }
+    allow_any_instance_of(App).to receive(:current_user).and_return(user)
+    level = Level.new(id: 1, name: "Asado", text: "carne")
+    question = Question.new(id: 10 ,text: "Estas leyendo?", levels_id: level.id, answer_id: 2)
+    get "/level/#{level.id}/question/#{question.id}"
+
+
+    expect(last_response.status).to eq(302)
+    follow_redirect!
+  end
+
+  it 'testing /level/:id_level/question/:id_question first if' do
+    user = { name: "colo", password: "aguanteboca123" }
+    allow_any_instance_of(App).to receive(:current_user).and_return(user)
+
+    level = Level.new(id: 1, name: "Asado", text: "carne")
+    question = Question.new(id: 10, text: "Estas leyendo?", levels_id: level.id, answer_id: 2)
+    get "/level/#{level.id}/question/#{question.id}"
+
+
+    expect(last_response.status).to eq(302)
+  end
+
   context 'POST /registermenu' do
     it 'successful register' do
       user_params = { name: 'colo', password: 'aguanteboca123' }
