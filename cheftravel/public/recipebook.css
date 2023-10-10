@@ -1,0 +1,104 @@
+/* menu de arriba */
+.menu {
+  font-family:'Courier New', Courier, monospace;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(96, 44, 7, 0.818);
+}
+
+.menu li {
+  margin: 0 60px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  display: block;
+}
+
+.menu li a:hover {
+  background-color: rgb(96, 44, 7);
+  border-radius: 5px;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://img.freepik.com/foto-gratis/vista-superior-pasta-cruda-tomates_23-2150690623.jpg?w=740&t=st=1695230218~exp=1695230818~hmac=824cc616939e1c2b10d8c6c747322bb05e95d24291f807d545762ec086594afb");
+  background-size:cover;
+  color: #fff;
+  font-size: large;
+}
+
+main.table {
+  width: 65vw;
+  height: auto;
+  background-color: rgba(179, 83, 15, 0.25);
+
+  backdrop-filter: blur(7px);
+  box-shadow: 0 .4rem .8rem #0005;
+  border-radius: .8rem;
+
+  overflow: hidden;
+}
+
+.table__header {
+  width: 100%;
+  height: 10%;
+  background-color: rgba(96, 44, 7, 0.6);
+  padding: .8rem 1rem;
+
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.table__body {
+  width: 95%;
+  max-height: calc(89% - 1.6rem);
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+  overflow: overlay;
+  text-align: center;
+  width: 100%; /* Ancho del contenedor */
+  height: 100%; /* Alto del contenedor */
+  overflow: hidden; /* Oculta el contenido que excede el contenedor */
+  white-space:pre-wrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 1rem;
+  text-align: center;
+}
+
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: x-large;
+}
+
