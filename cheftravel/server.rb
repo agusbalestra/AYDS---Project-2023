@@ -7,6 +7,10 @@ require 'sinatra/cookies'
 require 'bundler/setup'
 require 'sinatra/flash'
 require 'bcrypt'
+require 'omniauth'
+require 'omniauth-google-oauth2'
+require 'json'
+require 'jwt'
 
 require_relative 'models/question'
 require_relative 'models/user'
@@ -19,6 +23,9 @@ require_relative 'models/correct_questions'
 class App < Sinatra::Application
   enable :sessions
   register Sinatra::Cookies
+  use OmniAuth::Builder do
+    provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com', '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'
+  end
 
   def initialize(app = nil)
     super()
@@ -31,6 +38,48 @@ class App < Sinatra::Application
   # root page
   get '/' do
     erb :index
+  end
+
+  # Routes for Google authentication
+  post '/auth/google_callback' do
+    auth_response = request.body.read
+
+    credential_start = auth_response.index('credential=')
+    if credential_start
+      credential_start += 'credential='.length
+      jwt = auth_response[credential_start..-1]
+    else
+      return 'Error: No se encontró el token de autenticación.'
+    end
+
+    begin
+      decoded_token = JWT.decode(jwt, nil, false)
+    rescue JWT::DecodeError
+      return 'Error: El token no es válido.'
+    end
+
+    user_id = decoded_token[0]['sub']
+    name = decoded_token[0]['name']
+    email = decoded_token[0]['email']
+
+    user = User.find_by(email: email)
+    if user       # El usuario ya existe, se inicia sesión
+      session[:user_id] = user.id
+      
+    else       # Registro de usuario nuevo
+      begin
+        user = User.new(name: name, email: email)
+        user.auth_with_google = true  # skips validates
+        user.save
+        session[:user_id] = user.id
+      rescue => e
+        puts "Error al crear el usuario: #{e.message}"
+        puts e.backtrace
+      end
+    end
+
+    redirect '/menu'
+
   end
 
   # REGISTERMENU
