@@ -64,7 +64,7 @@ class App < Sinatra::Application
     user = User.find_by(email: email)
     if user       # El usuario ya existe, se inicia sesión
       session[:user_id] = user.id
-      
+
     else       # Registro de usuario nuevo
       begin
         user = User.new(name: name, email: email)
@@ -176,11 +176,14 @@ class App < Sinatra::Application
     question = Question.find(params[:question_id])
     option_id = params[:option_id].to_i
 
-    if option_id == 0 # si el usuario no seleciona una respuesta
+    if params[:timeout] == 'true'
+      redirect "/level/#{question.levels_id}/question/#{question.id+1}"
+
+    elsif option_id == 0 # si el usuario no seleciona una respuesta
 
       redirect "/level/#{question.levels_id}/question/#{question.id}"
-      
-    else # si el usuario selecciona una respuesta 
+
+    else # si el usuario selecciona una respuesta
 
       selected_option = Answer.find(option_id)
       user = current_user
@@ -189,7 +192,7 @@ class App < Sinatra::Application
         CorrectQuestions.create(question_id: question.id, user_id: user.id)
         user.points_treatment(selected_option.correct, question.difficulty)
       end
-      
+
       selected_option.correct ? correct = "correct" : correct = "incorrect"
       redirect "/#{correct}?question=#{question.id}"
     end
