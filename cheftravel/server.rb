@@ -6,6 +6,7 @@ require 'sinatra/reloader'
 require 'sinatra/cookies'
 require 'bundler/setup'
 require 'sinatra/flash'
+require 'bcrypt'
 
 require_relative 'models/question'
 require_relative 'models/user'
@@ -39,10 +40,13 @@ class App < Sinatra::Application
 
   post '/registermenu' do
     user = User.new(params)
+
     if user.valid?
+
       user.save
       session[:user_id] = user.id
       erb :menu, locals: { user: user }
+
     else
       erb :fail_register, locals: { msgfail: user.errors.full_messages }
     end
@@ -50,9 +54,9 @@ class App < Sinatra::Application
 
   # LOGMENU
   post '/logmenu' do
-    user = User.find_by(name: params[:name], password: params[:password])
+    user = User.find_by(name: params[:name])
 
-    if user
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/menu'
     else
@@ -221,22 +225,19 @@ class App < Sinatra::Application
     new_password = params[:password]
     new_pass_confirm = params[:password_confirmation]
     new_email = params[:email]
-    user.name = new_username
-    user.password = new_password
-    user.email = new_email
 
-    if new_username != '' && !User.find_by(name: new_username).nil?
+    if new_username != '' && User.find_by(name: new_username)
       flash[:error] = 'Name is not valid.'
     elsif new_password != '' && current_pass.nil?
       flash[:error] = 'Please provide your current password.'
     elsif new_password != new_pass_confirm
       flash[:error] = 'New password and confirmation do not match.'
-    elsif new_email != '' && !User.find_by(email: new_email).nil?
+    elsif new_email != '' && User.find_by(email: new_email)
       flash[:error] = 'Email is not valid.'
     else
-      user.update_column(:name, new_username) if new_username != ''
-      user.update_column(:password, new_password) if new_password != '' && current_pass != ''
-      user.update_column(:email, new_email) if new_email != ''
+      user.name = new_username if new_username != ''
+      user.password = new_password if new_password != '' && current_pass != ''
+      user.email = new_email if new_email != ''
 
       redirect '/profile' if user.save
     end
