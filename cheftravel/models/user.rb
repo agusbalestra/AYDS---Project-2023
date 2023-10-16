@@ -7,12 +7,13 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true, length: { in: 3..20 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "debe ser una dirección de correo electrónico válida" } # verifica que haya un caracter antes y dsp del @
-  validates :password, presence: true, length: { minimum: 4, too_short: "te queres ir hackeado?" }
+  validates :password, presence: true, length: { minimum: 4, too_short: "te queres ir hackeado?" }, unless: :auth_with_google
   
-  validate :password_match
+  validate :password_match, unless: :auth_with_google
   after_initialize :set_default_points
 
   attr_accessor :reppw
+  attr_accessor :auth_with_google
 
   def password_match
     if password != reppw
