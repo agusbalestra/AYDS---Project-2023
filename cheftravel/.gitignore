@@ -3,3 +3,4 @@ coverage/
 cheftravel/coverage
 Gemfile.lock
 .vscode/
+.idea/
