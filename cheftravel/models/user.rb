@@ -60,20 +60,12 @@ class User < ActiveRecord::Base
   end
 
   def level_treatment
-
-    puntos = self.points
-
-    case puntos
-    when -999..40
-      self.update_attribute :current_level, 0
-    when 50..100
-      self.update_attribute :current_level, 1
-    when 101..150
-      self.update_attribute :current_level, 2    
-    when 151..9999
-      self.update_attribute :current_level, 3
-    else
-      "Error: capacity has an invalid value (#{capacity})"
+    Level.all.each do |level|
+      questions_for_level = Question.where(levels_id: level.id)
+      p questions_for_level
+      if questions_for_level.all? { |q| CorrectQuestions.exists?(question_id: q.id, user_id: self.id) }
+        self.update_attribute :current_level, level.id
+      end
     end
   end
 
