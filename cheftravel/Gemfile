@@ -5,6 +5,8 @@ gem 'rake'
 gem 'sinatra-activerecord'
 gem 'sqlite3'
 gem 'sinatra-flash'
+gem 'omniauth-google-oauth2'
+gem 'jwt'
 group :test do
   gem 'rack-test'
   gem 'rspec'
