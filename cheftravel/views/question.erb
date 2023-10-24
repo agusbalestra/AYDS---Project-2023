@@ -36,7 +36,7 @@
   var timerElement = document.getElementById("timer");
 
   function updateTimer() {
-    timerElement.textContent = countdown;
+    timerElement.textContent = `Tiempo restante: ${countdown}`;
     countdown--;
 
     if (countdown < 0) {
