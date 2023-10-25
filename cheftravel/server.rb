@@ -24,14 +24,16 @@ class App < Sinatra::Application
   enable :sessions
   register Sinatra::Cookies
   use OmniAuth::Builder do
-    provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com', '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'
+    provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com',
+             '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'
   end
 
-  def initialize(app = nil)
+  def initialize(_app = nil)
     super()
   end
 
-  before ['/menu', '/arg', '/chile', '/ranking', '/level', '/question', '/correct', '/incorrect', '/profile', '/update_profile'] do
+  before ['/menu', '/arg', '/chile', '/ranking', '/level', '/question', '/correct', '/incorrect', '/profile',
+          '/update_profile'] do
     redirect '/' unless current_user.present?
   end
 
@@ -43,43 +45,37 @@ class App < Sinatra::Application
   # Routes for Google authentication
   post '/auth/google_callback' do
     auth_response = request.body.read
-
     credential_start = auth_response.index('credential=')
-    if credential_start
-      credential_start += 'credential='.length
-      jwt = auth_response[credential_start..-1]
-    else
-      return 'Error: No se encontró el token de autenticación.'
-    end
 
-    begin
-      decoded_token = JWT.decode(jwt, nil, false)
-    rescue JWT::DecodeError
-      return 'Error: El token no es válido.'
-    end
+    return 'Error: No authentication token found.' if credential_start.nil?
+
+    jwt = auth_response[(credential_start + 'credential='.length)..-1]
+
+    decoded_token = JWT.decode(jwt, nil, false)
 
     user_id = decoded_token[0]['sub']
     name = decoded_token[0]['name']
     email = decoded_token[0]['email']
 
     user = User.find_by(email: email)
-    if user       # El usuario ya existe, se inicia sesión
+
+    if user
+      session[:user_id] = user.id
+    else
+      user = User.new(name: name, email: email, password: SecureRandom.hex(10))
+      user.auth_with_google = true # Skip certain validations
+
+      return "Error: Unable to create a new user. #{user.errors.full_messages.join(', ')}" unless user.save
+
       session[:user_id] = user.id
 
-    else       # Registro de usuario nuevo
-      begin
-        user = User.new(name: name, email: email)
-        user.auth_with_google = true  # skips validates
-        user.save
-        session[:user_id] = user.id
-      rescue => e
-        puts "Error al crear el usuario: #{e.message}"
-        puts e.backtrace
-      end
     end
 
     redirect '/menu'
-
+  rescue JWT::DecodeError
+    return 'Error: Invalid token.'
+  rescue StandardError => e
+    return "Error: #{e.message}"
   end
 
   # REGISTERMENU
@@ -105,7 +101,7 @@ class App < Sinatra::Application
   post '/logmenu' do
     user = User.find_by(name: params[:name])
 
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password_digest])
       session[:user_id] = user.id
       redirect '/menu'
     else
@@ -150,19 +146,17 @@ class App < Sinatra::Application
       level = Level.find_by(id: params[:id_level])
       question = Question.find_by(id: params[:id_question])
 
-      if (question.present?)
-        if (level.id == question.levels_id)
+      if question.present?
+        if level.id == question.levels_id
           answers = Answer.where(question_id: question.id)
           user = current_user
 
           if level.id < 1000
-            erb :question, locals: {level: level, question: question, answers: answers, user: user}
+            erb :question, locals: { level: level, question: question, answers: answers, user: user }
+          elsif user.current_level >= 3
+            erb :frontera, locals: { level: level, question: question, answers: answers, user: user }
           else
-            if user.current_level >= 3
-              erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
-            else
-              redirect '/menu'
-            end
+            redirect '/menu'
           end
         else
           redirect '/menu'
@@ -181,7 +175,7 @@ class App < Sinatra::Application
     option_id = params[:option_id].to_i
 
     if params[:timeout] == 'true'
-      redirect "/level/#{question.levels_id}/question/#{question.id+1}"
+      redirect "/level/#{question.levels_id}/question/#{question.id + 1}"
 
     elsif option_id == 0 # si el usuario no seleciona una respuesta
 
@@ -197,7 +191,7 @@ class App < Sinatra::Application
         user.points_treatment(selected_option.correct, question.difficulty)
       end
 
-      selected_option.correct ? correct = "correct" : correct = "incorrect"
+      correct = selected_option.correct ? 'correct' : 'incorrect'
       redirect "/#{correct}?question=#{question.id}"
     end
   end
@@ -236,24 +230,21 @@ class App < Sinatra::Application
     max_lv = current_user.current_level
     levels = []
 
-    if(max_lv != 0)
+    if max_lv != 0
       for i in(1..max_lv)
         lv = Level.find(i)
         levels << lv
       end
     end
 
-    erb :recipebook, locals: {user: current_user,  levels: levels}
+    erb :recipebook, locals: { user: current_user, levels: levels }
   end
 
   get '/recipe-book/:id_level' do
+    lv = Level.find(params[:id_level])
 
-    lv = Level.find( params[:id_level])
-
-
-    erb :recipe, locals: {level: lv, user: current_user}
+    erb :recipe, locals: { level: lv, user: current_user }
   end
-
 
   ## PROFILE
   get '/profile' do
@@ -288,7 +279,7 @@ class App < Sinatra::Application
       flash[:error] = 'Email is not valid.'
     else
       user.name = new_username if new_username != ''
-      user.password = new_password if new_password != '' && current_pass != ''
+      user.password_digest = new_password if new_password != '' && current_pass != ''
       user.email = new_email if new_email != ''
 
       redirect '/profile' if user.save
