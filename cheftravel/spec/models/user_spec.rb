@@ -46,7 +46,7 @@ describe User do
     user.reppw = "paswor"
     expect(user).to be_valid
   end
-  
+
   it "is invalid with a email without @" do
     user = User.new(name: "koka", email: "mail.com", password: "password")
     expect(user).not_to be_valid

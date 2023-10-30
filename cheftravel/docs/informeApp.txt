@@ -1,0 +1,808 @@
+Inspecting 37 files
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCWCCCCC
+
+Offenses:
+
+Gemfile:8:1: C: [Correctable] Bundler/OrderedGems: Gems should be sorted in an alphabetical order within their section of the Gemfile. Gem sinatra-flash should appear before sqlite3.
+gem 'sinatra-flash'
+^^^^^^^^^^^^^^^^^^^
+Gemfile:9:1: C: [Correctable] Bundler/OrderedGems: Gems should be sorted in an alphabetical order within their section of the Gemfile. Gem omniauth-google-oauth2 should appear before sinatra-flash.
+gem 'omniauth-google-oauth2'
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gemfile:10:1: C: [Correctable] Bundler/OrderedGems: Gems should be sorted in an alphabetical order within their section of the Gemfile. Gem jwt should appear before omniauth-google-oauth2.
+gem 'jwt'
+^^^^^^^^^
+Rakefile.rb:1:1: C: Naming/FileName: The name of this source file (Rakefile.rb) should use snake_case.
+# Rakefile
+^
+Rakefile.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+# Rakefile
+^
+Rakefile.rb:2:9: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "sinatra/activerecord/rake"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rakefile.rb:6:13: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    require "./server"
+            ^^^^^^^^^^
+Rakefile.rb:8:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+config.ru:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require './server'
+^
+config/enviroment.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+  # config/environment.rb
+^
+config/enviroment.rb:2:3: C: [Correctable] Layout/InitialIndentation: Indentation of first line in file detected.
+  db_options = YAML.load(File.read('./config/database.yml'))
+  ^^^^^^^^^^
+config/enviroment.rb:2:21: C: [Correctable] Security/YAMLLoad: Prefer using YAML.safe_load over YAML.load.
+  db_options = YAML.load(File.read('./config/database.yml'))
+                    ^^^^
+config/enviroment.rb:5:67: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+  ActiveRecord::Base.establish_connection(db_options[environment])
+                                                                  
+config/initializer/omniauth.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Rails.application.config.middleware.use OmniAuth::Builder do
+^
+config/initializer/omniauth.rb:2:121: C: [Correctable] Layout/LineLength: Line is too long. [150/120]
+  provider :google_oauth2, ENV['832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com'], ENV['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']
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+config/initializer/omniauth.rb:3:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+db/migrate/20230501204440_create_user.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class CreateUser.
+class CreateUser < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^
+db/migrate/20230501204440_create_user.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class CreateUser < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230501204440_create_user.rb:5:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+db/migrate/20230501204440_create_user.rb:6:19: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+      t.timestamps 
+                  ^
+db/migrate/20230511022116_alter_user.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AlterUser.
+class AlterUser < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^
+db/migrate/20230511022116_alter_user.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AlterUser < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230511022116_alter_user.rb:2:1: C: [Correctable] Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+db/migrate/20230511022116_alter_user.rb:3:1: C: [Correctable] Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    add_column :users, :password, :string
+^^^^
+db/migrate/20230511022116_alter_user.rb:4:1: C: [Correctable] Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    add_column :users, :firstname, :string
+^^^^
+db/migrate/20230511022116_alter_user.rb:5:1: C: [Correctable] Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    add_column :users, :lastname, :string
+^^^^
+db/migrate/20230511022116_alter_user.rb:6:1: C: [Correctable] Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    add_column :users, :email, :string
+^^^^
+db/migrate/20230511022116_alter_user.rb:7:1: C: [Correctable] Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+db/migrate/20230511215234_create_questions.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class CreateQuestions.
+class CreateQuestions < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230511215234_create_questions.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class CreateQuestions < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230511222603_create_answers.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class CreateAnswers.
+class CreateAnswers < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^
+db/migrate/20230511222603_create_answers.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class CreateAnswers < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230511222603_create_answers.rb:5:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+db/migrate/20230512011547_add_references.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddReferences.
+class AddReferences < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^
+db/migrate/20230512011547_add_references.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddReferences < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230514153824_add_cuestion_ref_to_answer.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddCuestionRefToAnswer.
+class AddCuestionRefToAnswer < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230514153824_add_cuestion_ref_to_answer.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddCuestionRefToAnswer < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230514200534_add_points_user.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddPointsUser.
+class AddPointsUser < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^
+db/migrate/20230514200534_add_points_user.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddPointsUser < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230514200534_add_points_user.rb:3:37: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+    add_column :users, :points, :int 
+                                    ^
+db/migrate/20230515165119_col_for_images.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class ColForImages.
+class ColForImages < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^
+db/migrate/20230515165119_col_for_images.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class ColForImages < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230528001736_create_level.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class CreateLevel.
+class CreateLevel < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^
+db/migrate/20230528001736_create_level.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class CreateLevel < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230528001736_create_level.rb:3:1: C: [Correctable] Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+db/migrate/20230528001736_create_level.rb:11:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+db/migrate/20230528001904_referece_quest_level.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class RefereceQuestLevel.
+class RefereceQuestLevel < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230528001904_referece_quest_level.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class RefereceQuestLevel < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230528001904_referece_quest_level.rb:4:1: C: [Correctable] Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+db/migrate/20230608230936_add_text_column_in_question.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddTextColumnInQuestion.
+class AddTextColumnInQuestion < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230608230936_add_text_column_in_question.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddTextColumnInQuestion < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230919142113_add_level_att_to_user___.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddLevelAttToUser.
+class AddLevelAttToUser < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230919142113_add_level_att_to_user___.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddLevelAttToUser < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230919143324_change_column_points_add_default.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class ChangeColumnPointsAddDefault.
+class ChangeColumnPointsAddDefault < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230919143324_change_column_points_add_default.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class ChangeColumnPointsAddDefault < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230920154214_add_correct_questions.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddCorrectQuestions.
+class AddCorrectQuestions < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230920154214_add_correct_questions.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddCorrectQuestions < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230920161813_drop_unnecesary_table.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class DropUnnecesaryTable.
+class DropUnnecesaryTable < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230920161813_drop_unnecesary_table.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class DropUnnecesaryTable < ActiveRecord::Migration[7.0]
+^
+db/migrate/20230920161840_change_default_level.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class ChangeDefaultLevel.
+class ChangeDefaultLevel < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20230920161840_change_default_level.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class ChangeDefaultLevel < ActiveRecord::Migration[7.0]
+^
+db/migrate/20231010153125_add_password_digest_to_users.rb:1:1: C: Style/Documentation: Missing top-level documentation comment for class AddPasswordDigestToUsers.
+class AddPasswordDigestToUsers < ActiveRecord::Migration[7.0]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrate/20231010153125_add_password_digest_to_users.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class AddPasswordDigestToUsers < ActiveRecord::Migration[7.0]
+^
+db/migrate/20231010153125_add_password_digest_to_users.rb:5:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+db/schema.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+# This file is auto-generated from the current state of the database. Instead
+^
+db/schema.rb:13:1: C: Metrics/BlockLength: Block has too many lines. [48/25]
+ActiveRecord::Schema[7.0].define(version: 20_231_010_153_125) do ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+User.destroy_all
+^
+db/seeds.rb:7:121: C: Layout/LineLength: Line is too long. [170/120]
+# Level.create(name:"Dulce de Leche", text:"Ingredientes:\n- 1 litro de leche entera\n- 250 g de azúcar \n- 1 cucharadita de bicarbonato de sodio\n- Esencia de vainilla\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:10:121: C: Layout/LineLength: Line is too long. [152/120]
+#   2. Cuando hierva, baja un poco el fuego y añade el azúcar. Con una cuchara de madera remueve bien para evitar que se queme o se pegue en la base.\n 
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:10:152: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+#   2. Cuando hierva, baja un poco el fuego y añade el azúcar. Con una cuchara de madera remueve bien para evitar que se queme o se pegue en la base.\n 
+                                                                                                                                                       ^
+db/seeds.rb:13:121: C: Layout/LineLength: Line is too long. [141/120]
+#   La vainilla es al gusto pero te recomendamos que no viertas más de un cucharadita, para evitar que el sabor a dulce de leche disminuya.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:14:121: C: Layout/LineLength: Line is too long. [174/120]
+#   4. Sigue removiendo el dulce de leche sin dejar que hierva. Poco a poco verás que el color va cambiando hasta alcanzar el tono marrón tan característico de este postre.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:15:121: C: Layout/LineLength: Line is too long. [209/120]
+#   5. Conseguir la textura y color ideal del dulce de leche puede llevarte alrededor de 2 horas. Una vez hecho, guárdalo en un frasco y ya puedes comerlo como más te guste, en tostadas, crepes, tartas, etc.")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:17:333: C: Layout/LineLength: Line is too long. [481/120]
+# Question.create(text:"¿Cuál es el manjar tipico de Argentina?", difficulty: 1, link_imagen: "https://media.istockphoto.com/id/1398880959/es/foto/s%C3%ADmbolo-de-signo-de-interrogaci%C3%B3n-para-preguntas-frecuentes-informaci%C3%B3n-problemas-y-conceptos.webp?b=1&s=170667a&w=0&k=20&c=dMaP3PbKWnVSVzNI5Um5LS9bfoTMD058sEPRkQ_6-EM=", levels_id: 1, informed_text: "El dulce de leche, es un producto lácteo, que generalmente se utiliza como cobertura de postres tipicos de Argentina")
+                                                                                                                                                                                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:23:187: C: Layout/LineLength: Line is too long. [354/120]
+# Question.create(text: "¿Cuáles son los ingredientes para preparar dulce de leche?", difficulty: 1, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1, informed_text: "La vainilla podemos usarla en forma de extracto, esencia o semillas, lo que tengamos, en la cantidad deseada para dar un poco de aroma.")
+                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:29:269: C: Layout/LineLength: Line is too long. [390/120]
+# Question.create(text: "¿Cuál es el tiempo estimado para hacer dulce de leche?", difficulty: 1, link_imagen: "https://previews.123rf.com/images/kongvector/kongvector1801/kongvector180101987/93077357-chef-del-reloj-de-alarma-de-dibujos-animados-del-car%C3%A1cter.jpg", levels_id: 1, informed_text: "Conseguir la textura y color ideal del dulce de leche puede llevarte alrededor de 2 horas")
+                                                                                                                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:35:186: C: Layout/LineLength: Line is too long. [199/120]
+# Question.create(text: "¿Cuál es la cantidad de bicarbonato de sodio recomendado?", difficulty: 1, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1)
+                                                                                                                                                                                         ^^^^^^^^^^^^^^
+db/seeds.rb:41:167: C: Layout/LineLength: Line is too long. [323/120]
+# Question.create(text: "¿La preparación debe ir revolviendose?", difficulty: 1, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1, informed_text: "Con una cuchara de madera se debe ir removiendo bien durante toda la coccion para evitar que se queme o se pegue en la base.")
+                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:47:1: C: [Correctable] Layout/EmptyLines: Extra blank line detected.
+db/seeds.rb:68:121: C: Layout/LineLength: Line is too long. [211/120]
+#   informed_text: "La madera de quebracho es la tradicionalmente utilizada para el fuego del asado. Esta madera proporciona un sabor distintivo y un aroma ahumado característico a la carne durante la cocción.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:81:121: C: Layout/LineLength: Line is too long. [219/120]
+#   informed_text: "Las achuras en un asado argentino son las vísceras y órganos comestibles de la vaca. Estos cortes son apreciados por su sabor y se suelen cocinar a la parrilla junto con la carne principal del asado.
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:94:121: C: Layout/LineLength: Line is too long. [183/120]
+#   informed_text: "Antes de poner la carne en la parrilla, se recomienda salarla. El salado previo ayuda a realzar el sabor y jugosidad de la carne durante la cocción a la parrilla."
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:106:121: C: Layout/LineLength: Line is too long. [190/120]
+#   informed_text: "El chimichurri es una salsa típica argentina utilizada como condimento para carnes. Sus ingredientes principales son el perejil, el ajo, el vinagre y el aceite de oliva."
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:113:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+db/seeds.rb:114:121: C: Layout/LineLength: Line is too long. [306/120]
+# Level.create(name:"Locro", text:"Ingredientes: \n- 250g. de porotos blancos \n- 250g. de maíz \n- Chorizo colorado \n- Chorizo criollo \n- Cueritos de cerdo \n- Huesitos de cerdo \n- Falda \n- 200g. de panceta \n- 3 cebollas \n- 2 cebollas de verdeo \n- 1/2 calabaza \n- 1/2 morrón rojo (para la salsa)\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:117:121: C: Layout/LineLength: Line is too long. [191/120]
+#               1- Cortar las carnes en trozos pequeños, las verduras en rodajas bien bien finitas y la calabaza en cubos\n los porotos y el maíz remojarlos desde la noche anterior en agua.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:118:121: C: Layout/LineLength: Line is too long. [154/120]
+#               2- Colocar el chorizo, el cuerito, los huesitos y el chorizo colorado en una olla. \n Llevarlos al fuego 10-15 minutos hasta que hierva.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:119:121: C: Layout/LineLength: Line is too long. [443/120]
+#               3- Integrar en una olla caliente la panceta para que largue su grasa, luego agregar la cebolla de verdeo, el puerro, sal, aceite de oliva y saltear todo.\n Una vez blandito agregar el chorizo colorado, los cueritos de cerdos, el chorizo, el maíz, los porotos blancos.\n Agregar agua, tapar y dejar cocinar 1 hora y media en olla común (revolviendo de vez en cuando y viendo si le falta más agua) o 1/2 hora en olla a presión.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:120:121: C: Layout/LineLength: Line is too long. [255/120]
+#               4- A la olla con todos los ingredientes agregarle la calabaza cortada en cubos, el pechito, la falda, los condimentos, un poco más de agua y revolver bien. Dejar nuevamente 1/2 hora en olla a presión o una hora y media mas en olla común.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:121:121: C: Layout/LineLength: Line is too long. [285/120]
+#               5- Preparar la salsita: picar el morrón, 1 cebolla de verdeo y 1 cebolla común bien bien finitos. \n Agregar ají molido (bastante si la queres más picante), pimentón y orégano.\nCocinar a fuego bajo en bastante aceite de oliva hasta que esté bien blandita la cebolla.\n
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:122:121: C: Layout/LineLength: Line is too long. [136/120]
+#               6- Espesar y servir con la salsa encima y la parte verde de la cebolla de verdeo picada. Si te sobra, podes freezarlo.")
+                                                                                                                        ^^^^^^^^^^^^^^^^
+db/seeds.rb:124:1: C: [Correctable] Layout/EmptyLines: Extra blank line detected.
+db/seeds.rb:125:1: C: [Correctable] Layout/EmptyLines: Extra blank line detected.
+db/seeds.rb:127:342: C: Layout/LineLength: Line is too long. [501/120]
+# Question.create(text:"¿Cuál es la comida tipica de las fechas patrias?", difficulty: 1, link_imagen: "https://media.istockphoto.com/id/1398880959/es/foto/s%C3%ADmbolo-de-signo-de-interrogaci%C3%B3n-para-preguntas-frecuentes-informaci%C3%B3n-problemas-y-conceptos.webp?b=1&s=170667a&w=0&k=20&c=dMaP3PbKWnVSVzNI5Um5LS9bfoTMD058sEPRkQ_6-EM=", levels_id: 3, informed_text: "El locro es una especie de guiso de origen argentino comido especialmente en fechas patrias como el 25 de mayo y el 9 de julio.")
+                                                                                                                                                                                                                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:133:172: C: Layout/LineLength: Line is too long. [264/120]
+# Question.create(text: "¿Cuáles son los ingredientes para preparar locro?", difficulty: 1, link_imagen: "https://upc.edu.ar/wp-content/uploads/2020/05/Locro_Stevage.jpg", levels_id: 3, informed_text: "El locro esta hecho a base de calabaza, maíz, poroto blanco ")
+                                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:139:260: C: Layout/LineLength: Line is too long. [424/120]
+# Question.create(text: "¿Cuál es el tiempo estimado para hacer locro?", difficulty: 1, link_imagen: "https://previews.123rf.com/images/kongvector/kongvector1801/kongvector180101987/93077357-chef-del-reloj-de-alarma-de-dibujos-animados-del-car%C3%A1cter.jpg", levels_id: 3, informed_text: "El tiempo estimado es muy largo ya que se deben ir cocinando los distintos ingredientes en tiempos distintos y algunos por separado.")
+                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:145:141: C: Layout/LineLength: Line is too long. [154/120]
+# Question.create(text: "¿LLeva panceta?", difficulty: 1, link_imagen: "https://okdiario.com/img/2021/02/19/panceta-de-cerdo-5-620x465.jpg", levels_id: 3)
+                                                                                                                                            ^^^^^^^^^^^^^^
+db/seeds.rb:149:236: C: Layout/LineLength: Line is too long. [342/120]
+# Question.create(text: "¿Con cuanta cantidad se condimenta el locro con pimenton?", difficulty: 1, link_imagen: "https://cdn.businessinsider.es/sites/navi.axelspringer.es/public/media/image/2021/06/pimenton-vera-2364603.jpg?tf=3840x", levels_id: 3, informed_text: "Cada persona condimenta a gusto, para asi poder comerlo como mas le guste.")
+                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:155:328: C: Layout/LineLength: Line is too long. [430/120]
+# Question.create(text: "¿Que ingredientes lleva la salsa?", difficulty: 1, link_imagen: "https://media.istockphoto.com/id/1398880959/es/foto/s%C3%ADmbolo-de-signo-de-interrogaci%C3%B3n-para-preguntas-frecuentes-informaci%C3%B3n-problemas-y-conceptos.webp?b=1&s=170667a&w=0&k=20&c=dMaP3PbKWnVSVzNI5Um5LS9bfoTMD058sEPRkQ_6-EM=", levels_id: 3, informed_text: "Una vez servido en los platos se le pude agregar una salsa por arriba.")
+                                                                                                                                                                                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:161:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+db/seeds.rb:166:121: C: Layout/LineLength: Line is too long. [233/120]
+# qev1 = Question.create(text:"¿Por qué el Dulce de Leche se debe revolver constantemente durante su preparación?", difficulty: 3, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1000)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:172:121: C: Layout/LineLength: Line is too long. [217/120]
+# qev2 = Question.create(text:"¿Por qué la cocción del Dulce de Leche tarda alrededor de 2 horas?", difficulty: 3, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1000)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:178:181: C: Layout/LineLength: Line is too long. [197/120]
+# qev3 = Question.create(text:"¿Qué rol cumple la vainilla en su preparación?", difficulty: 3, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1000)
+                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^
+db/seeds.rb:184:168: C: Layout/LineLength: Line is too long. [184/120]
+# qev4 = Question.create(text:"¿El Dulce de Leche contiene TACC?", difficulty: 3, link_imagen: "https://www.cucinare.tv/wp-content/uploads/2019/10/Dulce-de-leche.jpg", levels_id: 1000)
+                                                                                                                                                                       ^^^^^^^^^^^^^^^^^
+db/seeds.rb:191:121: C: Layout/LineLength: Line is too long. [214/120]
+# qev5 = Question.create(text:"¿Por qué la cocción del asado debe ser lenta y a fuego medio?", difficulty: 3, link_imagen: "https://i.pinimg.com/564x/c5/44/d6/c544d60ead1c69a7be9aa9f451edb216.jpg", levels_id: 1000)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:197:183: C: Layout/LineLength: Line is too long. [199/120]
+# qev6 = Question.create(text:"¿Cuál es el proposito de lavar la tripa gorda?", difficulty: 3, link_imagen: "https://i.pinimg.com/564x/c5/44/d6/c544d60ead1c69a7be9aa9f451edb216.jpg", levels_id: 1000)
+                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^
+db/seeds.rb:203:187: C: Layout/LineLength: Line is too long. [203/120]
+# qev7 = Question.create(text:"¿Por qué debe salarse la carne antes de cocinarla?", difficulty: 3, link_imagen: "https://i.pinimg.com/564x/c5/44/d6/c544d60ead1c69a7be9aa9f451edb216.jpg", levels_id: 1000)
+                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^
+db/seeds.rb:209:190: C: Layout/LineLength: Line is too long. [206/120]
+# qev8 = Question.create(text:"¿Por qué generalmente se utiliza madera de quebracho?", difficulty: 3, link_imagen: "https://i.pinimg.com/564x/c5/44/d6/c544d60ead1c69a7be9aa9f451edb216.jpg", levels_id: 1000)
+                                                                                                                                                                                             ^^^^^^^^^^^^^^^^^
+db/seeds.rb:213:121: C: Layout/LineLength: Line is too long. [122/120]
+# Answer.create(text: "La madera de pino es la madera comunmente utilizada para un asado", correct: false, question: qev8)
+                                                                                                                        ^^
+db/seeds.rb:215:1: C: [Correctable] Layout/EmptyLines: Extra blank line detected.
+db/seeds.rb:217:121: C: Layout/LineLength: Line is too long. [202/120]
+# qev9 = Question.create(text:"¿Por qué la cocción del locro lleva alrededor de 4 horas?", difficulty: 3, link_imagen: "https://upc.edu.ar/wp-content/uploads/2020/05/Locro_Stevage.jpg", levels_id: 1000)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:223:155: C: Layout/LineLength: Line is too long. [171/120]
+# qev10 = Question.create(text:"¿Cómo se cocina el locro?", difficulty: 3, link_imagen: "https://upc.edu.ar/wp-content/uploads/2020/05/Locro_Stevage.jpg", levels_id: 1000)
+                                                                                                                                                          ^^^^^^^^^^^^^^^^^
+db/seeds.rb:229:165: C: Layout/LineLength: Line is too long. [181/120]
+# qev11 = Question.create(text:"¿Puede agregarsele una salsa extra?", difficulty: 3, link_imagen: "https://upc.edu.ar/wp-content/uploads/2020/05/Locro_Stevage.jpg", levels_id: 1000)
+                                                                                                                                                                    ^^^^^^^^^^^^^^^^^
+db/seeds.rb:233:91: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+# Answer.create(text: "Sí, una vez servido en los platos", correct: true, question: qev11)
+                                                                                          
+models/answer.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'active_record'
+^
+models/answer.rb:3:1: C: Style/Documentation: Missing top-level documentation comment for class Answer.
+class Answer < ActiveRecord::Base
+^^^^^^^^^^^^
+models/correct_questions.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class CorrectQuestions < ActiveRecord::Base
+^
+models/correct_questions.rb:2:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+models/init.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require_relative 'user'
+^
+models/init.rb:3:28: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+require_relative 'question'
+                           
+models/level.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'active_record'
+^
+models/level.rb:3:1: C: Style/Documentation: Missing top-level documentation comment for class Level.
+class Level < ActiveRecord::Base
+^^^^^^^^^^^
+models/question.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'active_record'
+^
+models/question.rb:5:1: C: Style/Documentation: Missing top-level documentation comment for class Question.
+class Question < ActiveRecord::Base
+^^^^^^^^^^^^^^
+models/question.rb:9:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+models/question.rb:14:121: C: Layout/LineLength: Line is too long. [127/120]
+  validates :answer_id, presence: true, numericality: { only_integer: true, greater_than: 0 } # has a correct associated answer
+                                                                                                                        ^^^^^^^
+models/question.rb:15:1: C: [Correctable] Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+models/question.rb:17:1: C: [Correctable] Layout/TrailingEmptyLines: 2 trailing blank lines detected.
+models/recipe.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'active_record'
+^
+models/recipe.rb:3:1: C: Style/Documentation: Missing top-level documentation comment for class Recipe.
+class Recipe < ActiveRecord::Base
+^^^^^^^^^^^^
+models/user.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require_relative 'question'
+^
+models/user.rb:5:1: C: Style/Documentation: Missing top-level documentation comment for class User.
+class User < ActiveRecord::Base
+^^^^^^^^^^
+models/user.rb:14:121: C: Layout/LineLength: Line is too long. [207/120]
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'debe ser una dirección de correo electrónico válida' } # verifica que haya un caracter antes y dsp del @
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:35:5: C: [Correctable] Style/CaseLikeIf: Convert if-elsif to case-when.
+    if diff == 1 ...
+    ^^^^^^^^^^^^
+models/user.rb:47:5: C: [Correctable] Style/CaseLikeIf: Convert if-elsif to case-when.
+    if diff == 1 ...
+    ^^^^^^^^^^^^
+server.rb:23:1: C: Metrics/ClassLength: Class has too many lines. [204/100]
+class App < Sinatra::Application ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.rb:52:25: C: [Correctable] Style/SlicingWithRange: Prefer ary[n..] over ary[n..-1].
+    jwt = auth_response[(credential_start + 'credential='.length)..-1]
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.rb:56:5: W: [Correctable] Lint/UselessAssignment: Useless assignment to variable - user_id. Did you mean user?
+    user_id = decoded_token[0]['sub']
+    ^^^^^^^
+server.rb:63:7: C: [Correctable] Style/IdenticalConditionalBranches: Move session[:user_id] = user.id out of the conditional.
+      session[:user_id] = user.id
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.rb:70:7: C: [Correctable] Style/IdenticalConditionalBranches: Move session[:user_id] = user.id out of the conditional.
+      session[:user_id] = user.id
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.rb:104:8: C: [Correctable] Style/SafeNavigation: Use safe navigation (&.) instead of checking if an object exists before calling the method.
+    if user && user.authenticate(params[:password_digest])
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+server.rb:154:11: C: Metrics/BlockNesting: Avoid more than 3 levels of block nesting.
+          if level.id < 1000 ...
+          ^^^^^^^^^^^^^^^^^^
+server.rb:180:11: C: [Correctable] Style/NumericPredicate: Use option_id.zero? instead of option_id == 0.
+    elsif option_id == 0 # si el usuario no seleciona una respuesta
+          ^^^^^^^^^^^^^^
+server.rb:189:121: C: Layout/LineLength: Line is too long. [135/120]
+      unless CorrectQuestions.exists?(question_id: question.id, user_id: user.id) # para que no sume puntos si ya contesto esa pregunta
+                                                                                                                        ^^^^^^^^^^^^^^^
+server.rb:234:7: C: [Correctable] Style/For: Prefer each over for.
+      for i in(1..max_lv) ...
+      ^^^^^^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/activerecord'
+^
+spec/models/answer_spec.rb:2:36: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../../models/init.rb'
+                                   ^^^
+spec/models/answer_spec.rb:5:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
+spec/models/answer_spec.rb:6:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "answer have a question" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:7:31: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    answer = Answer.new(text: "Dulce De Leche", correct: true)
+                              ^^^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:8:27: C: [Correctable] Layout/SpaceAroundMethodCallOperator: Avoid using spaces around a method call operator.
+    expect(answer.valid?). to be_falsey
+                          ^
+spec/models/answer_spec.rb:11:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "answer valid" do
+     ^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:12:42: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = Question.new(id: 1, text: "Cual es el manjar tipico de Argentina?", difficulty: 1)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:13:31: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    answer = Answer.new(text: "Dulce De Leche", correct: true, question: question)
+                              ^^^^^^^^^^^^^^^^
+spec/models/answer_spec.rb:16:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+spec/models/question_spec.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/activerecord'
+^
+spec/models/question_spec.rb:2:36: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../../models/init.rb'
+                                   ^^^
+spec/models/question_spec.rb:5:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
+spec/models/question_spec.rb:6:30: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+  it 'is a valid question' do 
+                             ^
+spec/models/question_spec.rb:7:35: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = Question.new(text: "Estas leyendo?", levels_id: 1, answer_id: 2)
+                                  ^^^^^^^^^^^^^^^^
+spec/models/question_spec.rb:11:34: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+  it 'is invalid with no text' do 
+                                 ^
+spec/models/question_spec.rb:16:55: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+  it 'is invalid with no correct answer associated' do 
+                                                      ^
+spec/models/question_spec.rb:17:35: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = Question.new(text: "Que te parece?", levels_id: 1)
+                                  ^^^^^^^^^^^^^^^^
+spec/models/question_spec.rb:21:59: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+  it 'is invalid with negative id of answer associated' do 
+                                                          ^
+spec/models/question_spec.rb:22:35: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = Question.new(text: "Seguis leyendo?", levels_id: 1, answer_id: -2)
+                                  ^^^^^^^^^^^^^^^^^
+spec/models/question_spec.rb:25:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+spec/models/question_spec.rb:26:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+spec/models/server_spec.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'rack/test'
+^
+spec/models/server_spec.rb:3:36: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../../models/init.rb'
+                                   ^^^
+spec/models/server_spec.rb:4:31: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../../server.rb'
+                              ^^^
+spec/models/server_spec.rb:6:1: C: [Correctable] Layout/EmptyLines: Extra blank line detected.
+spec/models/server_spec.rb:7:1: C: Metrics/BlockLength: Block has too many lines. [30/25]
+RSpec.describe 'Sinatra App' do ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/server_spec.rb:34:22: C: [Correctable] Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                     ^
+spec/models/server_spec.rb:34:29: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                            ^^^^^^
+spec/models/server_spec.rb:34:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                                              ^^^^^^^^^^^^^^^^
+spec/models/server_spec.rb:34:63: C: [Correctable] Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                                                              ^
+spec/models/server_spec.rb:40:22: C: [Correctable] Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                     ^
+spec/models/server_spec.rb:40:29: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                            ^^^^^^
+spec/models/server_spec.rb:40:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                                              ^^^^^^^^^^^^^^^^
+spec/models/server_spec.rb:40:63: C: [Correctable] Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+                                                              ^
+spec/models/server_spec.rb:44:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+spec/models/server_spec.rb:45:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+spec/models/user_spec.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+# spec/models/user_spec.rb
+^
+spec/models/user_spec.rb:3:36: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../../models/init.rb'
+                                   ^^^
+spec/models/user_spec.rb:5:1: C: Metrics/BlockLength: Block has too many lines. [93/25]
+describe User do ...
+^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:6:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
+spec/models/user_spec.rb:7:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is a valid user" do
+     ^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:8:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "romanino", email: "riquelme10torero@gmail.com", password: "avostegusta?")
+                          ^^^^^^^^^^
+spec/models/user_spec.rb:8:46: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "romanino", email: "riquelme10torero@gmail.com", password: "avostegusta?")
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:8:86: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "romanino", email: "riquelme10torero@gmail.com", password: "avostegusta?")
+                                                                                     ^^^^^^^^^^^^^^
+spec/models/user_spec.rb:9:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "avostegusta?"
+                 ^^^^^^^^^^^^^^
+spec/models/user_spec.rb:13:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid without a username" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:14:28: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(email: "romi10@gmail.com", password: "boca123")
+                           ^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:14:58: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(email: "romi10@gmail.com", password: "boca123")
+                                                         ^^^^^^^^^
+spec/models/user_spec.rb:15:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "boca123"
+                 ^^^^^^^^^
+spec/models/user_spec.rb:19:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid without an email" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:20:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "marten", password: "bocaaa")
+                          ^^^^^^^^
+spec/models/user_spec.rb:20:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "marten", password: "bocaaa")
+                                              ^^^^^^^^
+spec/models/user_spec.rb:21:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "bocaaa"
+                 ^^^^^^^^
+spec/models/user_spec.rb:25:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid without a password" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:26:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "liomessi10", email: "soydeboca@gmail.com")
+                          ^^^^^^^^^^^^
+spec/models/user_spec.rb:26:48: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "liomessi10", email: "soydeboca@gmail.com")
+                                               ^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:30:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid with a duplicate email address" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:31:39: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "pichonadvincula", email: "peru@example.com", password: "zambradios")
+                                      ^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:31:65: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "pichonadvincula", email: "peru@example.com", password: "zambradios")
+                                                                ^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:31:95: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "pichonadvincula", email: "peru@example.com", password: "zambradios")
+                                                                                              ^^^^^^^^^^^^
+spec/models/user_spec.rb:32:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "cheftravel", email: "peru@example.com", password: "latercera")
+                          ^^^^^^^^^^^^
+spec/models/user_spec.rb:32:48: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "cheftravel", email: "peru@example.com", password: "latercera")
+                                               ^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:32:78: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "cheftravel", email: "peru@example.com", password: "latercera")
+                                                                             ^^^^^^^^^^^
+spec/models/user_spec.rb:37:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid with a duplicate username" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:38:39: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "MarcosRED", email: "bocaelmasgrande@example.com", password: "matafuegos123")
+                                      ^^^^^^^^^^^
+spec/models/user_spec.rb:38:59: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "MarcosRED", email: "bocaelmasgrande@example.com", password: "matafuegos123")
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:38:100: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    existing_user = User.create(name: "MarcosRED", email: "bocaelmasgrande@example.com", password: "matafuegos123")
+                                                                                                   ^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:39:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password")
+                          ^^^^^^^^^^^
+spec/models/user_spec.rb:39:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password")
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:39:82: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password")
+                                                                                 ^^^^^^^^^^
+spec/models/user_spec.rb:44:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid if pws not matches" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:45:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password", reppw: "paswor")
+                          ^^^^^^^^^^^
+spec/models/user_spec.rb:45:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password", reppw: "paswor")
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:45:82: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password", reppw: "paswor")
+                                                                                 ^^^^^^^^^^
+spec/models/user_spec.rb:45:101: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password", reppw: "paswor")
+                                                                                                    ^^^^^^^^
+spec/models/user_spec.rb:49:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is valid if pws matches" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:50:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "marquitos", email: "tefuistealab@gmail.com", password: "paswor")
+                          ^^^^^^^^^^^
+spec/models/user_spec.rb:50:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "marquitos", email: "tefuistealab@gmail.com", password: "paswor")
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:50:83: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "marquitos", email: "tefuistealab@gmail.com", password: "paswor")
+                                                                                  ^^^^^^^^
+spec/models/user_spec.rb:51:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "paswor"
+                 ^^^^^^^^
+spec/models/user_spec.rb:54:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
+spec/models/user_spec.rb:55:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid with a email without @" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:56:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "koka", email: "mail.com", password: "password")
+                          ^^^^^^
+spec/models/user_spec.rb:56:42: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "koka", email: "mail.com", password: "password")
+                                         ^^^^^^^^^^
+spec/models/user_spec.rb:56:64: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "koka", email: "mail.com", password: "password")
+                                                               ^^^^^^^^^^
+spec/models/user_spec.rb:60:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "is invalid with a too short pw" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:61:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "changuito", email: "elchango7eballos@hotmail.com", password: "aaa")
+                          ^^^^^^^^^^^
+spec/models/user_spec.rb:61:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "changuito", email: "elchango7eballos@hotmail.com", password: "aaa")
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:61:89: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "changuito", email: "elchango7eballos@hotmail.com", password: "aaa")
+                                                                                        ^^^^^
+spec/models/user_spec.rb:62:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "aaa"
+                 ^^^^^
+spec/models/user_spec.rb:66:3: C: [Correctable] Layout/LeadingCommentSpace: Missing space after #.
+  #TESTS for points tratament
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:67:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points with a question of difficulty 1" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:68:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "colo", email: "colobarco@gmail.com", password: "aguanteboca123")
+                          ^^^^^^
+spec/models/user_spec.rb:68:42: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "colo", email: "colobarco@gmail.com", password: "aguanteboca123")
+                                         ^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:68:75: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "colo", email: "colobarco@gmail.com", password: "aguanteboca123")
+                                                                          ^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:69:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "aguanteboca123"
+                 ^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:70:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Cual es el manjar tipico de Argentina?", difficulty: 1)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:75:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points with a question of difficulty 2" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:76:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "lucasjanson", email: "jansonson@mail.com", password: "bocaaaaa12")
+                          ^^^^^^^^^^^^^
+spec/models/user_spec.rb:76:49: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "lucasjanson", email: "jansonson@mail.com", password: "bocaaaaa12")
+                                                ^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:76:81: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "lucasjanson", email: "jansonson@mail.com", password: "bocaaaaa12")
+                                                                                ^^^^^^^^^^^^
+spec/models/user_spec.rb:77:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "bocaaaaa12"
+                 ^^^^^^^^^^^^
+spec/models/user_spec.rb:78:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Qué tipo de madera es tradicionalmente utilizada para el fuego del asado?", difficulty: 2)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:84:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points with a question of difficulty 3" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:85:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Carlos", email: "apache@mail.com", password: "bocaaaaa12")
+                          ^^^^^^^^
+spec/models/user_spec.rb:85:44: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Carlos", email: "apache@mail.com", password: "bocaaaaa12")
+                                           ^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:85:73: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Carlos", email: "apache@mail.com", password: "bocaaaaa12")
+                                                                        ^^^^^^^^^^^^
+spec/models/user_spec.rb:86:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "bocaaaaa12"
+                 ^^^^^^^^^^^^
+spec/models/user_spec.rb:87:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Qué rol cumple la vainilla en su preparación?", difficulty: 3)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:92:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points negatively with a question of difficulty 1" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:93:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "hamburguesitafabra", email: "ffabra@example.com", password: "liberenAlPanitaVilla123")
+                          ^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:93:56: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "hamburguesitafabra", email: "ffabra@example.com", password: "liberenAlPanitaVilla123")
+                                                       ^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:93:88: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "hamburguesitafabra", email: "ffabra@example.com", password: "liberenAlPanitaVilla123")
+                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:94:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "liberenAlPanitaVilla123"
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:95:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Cuáles son los ingredientes para preparar dulce de leche?", difficulty: 1)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:100:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points negatively with a question of difficulty 2" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:101:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "javiGODcia", email: "javmanco1@mail.com", password: "aBreyLeFaltaTodavia123")
+                          ^^^^^^^^^^^^
+spec/models/user_spec.rb:101:48: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "javiGODcia", email: "javmanco1@mail.com", password: "aBreyLeFaltaTodavia123")
+                                               ^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:101:80: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "javiGODcia", email: "javmanco1@mail.com", password: "aBreyLeFaltaTodavia123")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:102:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "aBreyLeFaltaTodavia123"
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:103:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Cuál es el proceso principal para lograr un buen asado argentino?", difficulty: 2)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:108:6: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  it "updates points negatively with a question of difficulty 3" do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:109:27: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Roncaglia", email: "troncaglia2@mail.com", password: "oPasaLaPelotaoPasaElJugador")
+                          ^^^^^^^^^^^
+spec/models/user_spec.rb:109:47: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Roncaglia", email: "troncaglia2@mail.com", password: "oPasaLaPelotaoPasaElJugador")
+                                              ^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:109:81: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user = User.new(name: "Roncaglia", email: "troncaglia2@mail.com", password: "oPasaLaPelotaoPasaElJugador")
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:110:18: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    user.reppw = "oPasaLaPelotaoPasaElJugador"
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:112:23: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    question = double("¿Por qué el Dulce de Leche se debe revolver constantemente durante su preparación?", difficulty: 3)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/user_spec.rb:112:121: C: [Correctable] Layout/LineLength: Line is too long. [122/120]
+    question = double("¿Por qué el Dulce de Leche se debe revolver constantemente durante su preparación?", difficulty: 3)
+                                                                                                                        ^^
+spec/models/user_spec.rb:114:34: C: [Correctable] Layout/SpaceAroundOperators: Surrounding space missing for operator -.
+    expect(user.points).to eq(100-30)
+                                 ^
+spec/models/user_spec.rb:116:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+spec/models/user_spec.rb:117:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+spec/spec_helper.rb:1:1: C: [Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/base'
+^
+spec/spec_helper.rb:5:1: C: [Correctable] Layout/EmptyComment: Source code comment is empty.
+#
+^
+spec/spec_helper.rb:11:1: C: [Correctable] Layout/LeadingCommentSpace: Missing space after #.
+#ActiveRecord::Base.logger.level = 1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:12:121: C: Layout/LineLength: Line is too long. [133/120]
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/test.sqlite3') # Cambia los detalles según tu configuración
+                                                                                                                        ^^^^^^^^^^^^^
+spec/spec_helper.rb:14:39: C: [Correctable] Style/RedundantFileExtensionInRequire: Redundant .rb file extension detected.
+require_relative '../config/enviroment.rb'
+                                      ^^^
+spec/spec_helper.rb:26:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+
+37 files inspected, 283 offenses detected, 212 offenses autocorrectable
