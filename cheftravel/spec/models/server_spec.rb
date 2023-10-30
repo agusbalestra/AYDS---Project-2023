@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rack/test'
 require 'sinatra/activerecord'
-require_relative '../../models/init.rb'
-require_relative '../../server.rb'
-
+require_relative '../../models/init'
+require_relative '../../server'
 
 RSpec.describe 'Sinatra App' do
   include Rack::Test::Methods
@@ -31,15 +32,14 @@ RSpec.describe 'Sinatra App' do
   end
 
   it 'testing menu' do
-    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+    post '/logmenu', { name: 'colo', password: 'aguanteboca123' }
     get '/menu'
     expect(last_response.status).to eq(200)
   end
 
   it 'testing chile' do
-    post '/logmenu', {name: "colo", password: "aguanteboca123"}
+    post '/logmenu', { name: 'colo', password: 'aguanteboca123' }
     get '/chile'
     expect(last_response.status).to eq(200)
   end
-
 end

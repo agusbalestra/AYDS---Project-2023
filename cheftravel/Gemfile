@@ -2,12 +2,12 @@
 
 source 'https://rubygems.org'
 gem 'bcrypt'
+gem 'jwt'
+gem 'omniauth-google-oauth2'
 gem 'rake'
 gem 'sinatra-activerecord'
-gem 'sqlite3'
 gem 'sinatra-flash'
-gem 'omniauth-google-oauth2'
-gem 'jwt'
+gem 'sqlite3'
 group :test do
   gem 'rack-test'
   gem 'rspec'
@@ -17,3 +17,4 @@ github 'sinatra/sinatra' do
   gem 'sinatra'
   gem 'sinatra-contrib'
 end
+gem 'rubocop', require: false
