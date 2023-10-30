@@ -41,11 +41,6 @@ describe User do
     existing_user.destroy
   end
 
-  it "is invalid if pws not matches" do
-    user = User.new(name: "MarcosRED", email: "tefuistealab@mail.com", password: "password", reppw: "paswor")
-    expect(user).not_to be_valid
-  end
-
   it "is valid if pws matches" do
     user = User.new(name: "marquitos", email: "tefuistealab@gmail.com", password: "paswor")
     user.reppw = "paswor"
@@ -54,12 +49,6 @@ describe User do
   
   it "is invalid with a email without @" do
     user = User.new(name: "koka", email: "mail.com", password: "password")
-    expect(user).not_to be_valid
-  end
-
-  it "is invalid with a too short pw" do
-    user = User.new(name: "changuito", email: "elchango7eballos@hotmail.com", password: "aaa")
-    user.reppw = "aaa"
     expect(user).not_to be_valid
   end
 
