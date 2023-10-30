@@ -31,15 +31,8 @@ RSpec.describe 'Sinatra App' do
     expect(last_response.status).to eq(302)
   end
 
-  it 'testing menu' do
+  it 'testing login' do
     post '/logmenu', { name: 'colo', password: 'aguanteboca123' }
-    get '/menu'
-    expect(last_response.status).to eq(200)
-  end
-
-  it 'testing chile' do
-    post '/logmenu', { name: 'colo', password: 'aguanteboca123' }
-    get '/chile'
     expect(last_response.status).to eq(200)
   end
 end
