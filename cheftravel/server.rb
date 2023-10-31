@@ -12,21 +12,19 @@ require 'omniauth-google-oauth2'
 require 'json'
 require 'jwt'
 
-require_relative 'models/question'
-require_relative 'models/user'
-require_relative 'models/answer'
-require_relative 'models/level'
-require_relative 'models/recipe'
-require_relative 'models/correct_questions'
+require_relative 'models/init'
+require_relative 'controllers/init'
 
 # Server for app
 class App < Sinatra::Application
-  enable :sessions
-  register Sinatra::Cookies
+  use UserController
   use OmniAuth::Builder do
     provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com',
              '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'
   end
+
+  enable :sessions
+  register Sinatra::Cookies
 
   def initialize(_app = nil)
     super()
@@ -50,29 +48,29 @@ class App < Sinatra::Application
     return 'Error: No authentication token found.' if credential_start.nil?
 
     jwt = auth_response[(credential_start + 'credential='.length)..]
+    begin
+      decoded_token = JWT.decode(jwt, nil, false)
 
-    decoded_token = JWT.decode(jwt, nil, false)
+      # user_id = decoded_token[0]['sub']
+      name = decoded_token[0]['name']
+      email = decoded_token[0]['email']
 
-    decoded_token[0]['sub']
-    name = decoded_token[0]['name']
-    email = decoded_token[0]['email']
+      user = User.find_by(email: email)
 
-    user = User.find_by(email: email)
+      unless user.present?
+        user = User.new(name: name, email: email, password: SecureRandom.hex(10))
+        user.auth_with_google = true # Skip certain validations
 
-    unless user
-      user = User.new(name: name, email: email, password: SecureRandom.hex(10))
-      user.auth_with_google = true # Skip certain validations
+        return "Error: Unable to create a new user. #{user.errors.full_messages.join(', ')}" unless user.save
+      end
 
-      return "Error: Unable to create a new user. #{user.errors.full_messages.join(', ')}" unless user.save
-
+      session[:user_id] = user.id
+      redirect '/menu'
+    rescue JWT::DecodeError
+      return 'Error: Invalid token.'
+    rescue StandardError => e
+      return "Error: #{e.message}"
     end
-    session[:user_id] = user.id
-
-    redirect '/menu'
-  rescue JWT::DecodeError
-    return 'Error: Invalid token.'
-  rescue StandardError => e
-    return "Error: #{e.message}"
   end
 
   # REGISTERMENU
@@ -95,17 +93,6 @@ class App < Sinatra::Application
   end
 
   # LOGMENU
-  post '/logmenu' do
-    user = User.find_by(name: params[:name])
-
-    if user&.authenticate(params[:password_digest])
-      session[:user_id] = user.id
-      redirect '/menu'
-    else
-      msg = 'Usuario y/o contraseña incorrectos. Inténtalo nuevamente'
-      erb :fail_login, locals: { msg: msg }
-    end
-  end
 
   get '/menu' do
     user = current_user
@@ -139,31 +126,26 @@ class App < Sinatra::Application
   end
 
   get '/level/:id_level/question/:id_question' do
-    if current_user.present?
-      level = Level.find_by(id: params[:id_level])
-      question = Question.find_by(id: params[:id_question])
+    level = Level.find_by(id: params[:id_level])
+    question = Question.find_by(id: params[:id_question])
 
-      if question.present?
-        if level.id == question.levels_id
-          answers = Answer.where(question_id: question.id)
-          user = current_user
+    if question.present?
+      if level.id == question.levels_id
+        answers = Answer.where(question_id: question.id)
+        user = current_user
 
-          if level.id < 1000
-            erb :question, locals: { level: level, question: question, answers: answers, user: user }
-          elsif user.current_level >= 3
-            erb :frontera, locals: { level: level, question: question, answers: answers, user: user }
-          else
-            redirect '/menu'
-          end
+        if level.id < 1000
+          erb :question, locals: { level: level, question: question, answers: answers, user: user }
+        elsif user.current_level >= 3
+          erb :frontera, locals: { level: level, question: question, answers: answers, user: user }
         else
           redirect '/menu'
         end
       else
         redirect '/menu'
       end
-
-    else # user not logued
-      redirect '/'
+    else
+      redirect '/menu'
     end
   end
 
@@ -183,7 +165,8 @@ class App < Sinatra::Application
       selected_option = Answer.find(option_id)
       user = current_user
 
-      unless CorrectQuestions.exists?(question_id: question.id, user_id: user.id) # para que no sume puntos si ya contesto esa pregunta
+      # Para que no sume puntos si ya contesto esa pregunta
+      unless CorrectQuestions.exists?(question_id: question.id, user_id: user.id)
         CorrectQuestions.create(question_id: question.id, user_id: user.id)
         user.points_treatment(selected_option.correct, question.difficulty)
       end

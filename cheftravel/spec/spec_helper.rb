@@ -10,7 +10,7 @@ ENV['RACK_ENV'] ||= 'test'
 ENV['APP_ENV'] ||= 'test'
 
 # ActiveRecord::Base.logger.level = 1
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/test.sqlite3') # Cambia los detalles según tu configuración
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/test.sqlite3')
 
 require_relative '../config/enviroment'
 
