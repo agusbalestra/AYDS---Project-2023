@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     elsif diff == 2
       new_points -= 20
     elsif diff == 3
-      new_points += 30
+      new_points -= 30
     end
     update_attribute :points, new_points
   end
