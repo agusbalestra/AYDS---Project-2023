@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
       new_points -= 10
     when 2
       new_points -= 20
-    when 3
-      new_points += 30
+    when 3  
+      new_points -= 30
     end
     update_attribute :points, new_points
   end
