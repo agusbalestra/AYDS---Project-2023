@@ -49,27 +49,24 @@ class App < Sinatra::Application
 
     return 'Error: No authentication token found.' if credential_start.nil?
 
-    jwt = auth_response[(credential_start + 'credential='.length)..-1]
+    jwt = auth_response[(credential_start + 'credential='.length)..]
 
     decoded_token = JWT.decode(jwt, nil, false)
 
-    user_id = decoded_token[0]['sub']
+    decoded_token[0]['sub']
     name = decoded_token[0]['name']
     email = decoded_token[0]['email']
 
     user = User.find_by(email: email)
 
-    if user
-      session[:user_id] = user.id
-    else
+    unless user
       user = User.new(name: name, email: email, password: SecureRandom.hex(10))
       user.auth_with_google = true # Skip certain validations
 
       return "Error: Unable to create a new user. #{user.errors.full_messages.join(', ')}" unless user.save
 
-      session[:user_id] = user.id
-
     end
+    session[:user_id] = user.id
 
     redirect '/menu'
   rescue JWT::DecodeError
@@ -101,7 +98,7 @@ class App < Sinatra::Application
   post '/logmenu' do
     user = User.find_by(name: params[:name])
 
-    if user && user.authenticate(params[:password_digest])
+    if user&.authenticate(params[:password_digest])
       session[:user_id] = user.id
       redirect '/menu'
     else
@@ -177,7 +174,7 @@ class App < Sinatra::Application
     if params[:timeout] == 'true'
       redirect "/level/#{question.levels_id}/question/#{question.id + 1}"
 
-    elsif option_id == 0 # si el usuario no seleciona una respuesta
+    elsif option_id.zero? # si el usuario no seleciona una respuesta
 
       redirect "/level/#{question.levels_id}/question/#{question.id}"
 
@@ -231,7 +228,7 @@ class App < Sinatra::Application
     levels = []
 
     if max_lv != 0
-      for i in(1..max_lv)
+      (1..max_lv).each do |i|
         lv = Level.find(i)
         levels << lv
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 User.destroy_all
 # Answer.destroy_all
 # Question.destroy_all
@@ -7,7 +9,7 @@ User.destroy_all
 # Level.create(name:"Dulce de Leche", text:"Ingredientes:\n- 1 litro de leche entera\n- 250 g de azúcar \n- 1 cucharadita de bicarbonato de sodio\n- Esencia de vainilla\n
 #   Necesitaras:\n- Una olla\n- Cuchara de madera\n- Recipiente para guardar el dulce\nPasos a seguir:\n
 #   1. Introduce en la olla la leche y caliéntala a fuego medio hasta que hierva.\n
-#   2. Cuando hierva, baja un poco el fuego y añade el azúcar. Con una cuchara de madera remueve bien para evitar que se queme o se pegue en la base.\n 
+#   2. Cuando hierva, baja un poco el fuego y añade el azúcar. Con una cuchara de madera remueve bien para evitar que se queme o se pegue en la base.\n
 #   Debes mezclar hasta que el azúcar esté bien disuelto para hacer el dulce de leche.\n
 #   3. Cuando el azúcar se haya disuelto, añade el bicarbonato de sodio y la esencia de vainilla.\n
 #   La vainilla es al gusto pero te recomendamos que no viertas más de un cucharadita, para evitar que el sabor a dulce de leche disminuya.\n
@@ -43,7 +45,6 @@ User.destroy_all
 # Answer.create(text: "Sí, una vez cada media hora", correct: false, question_id: 5)
 # Answer.create(text: "Depende", correct: false, question_id: 5)
 # Answer.create(text: "Sí, todo el tiempo", correct: true, question_id: 5)
-
 
 # # LEVEL ASADO
 # Level.create(name:"Asado", text:"")
@@ -110,7 +111,6 @@ User.destroy_all
 # Answer.create(text: "Cilantro, chile, jugo de limón y aceite de ajonjolí", correct: false, question_id: 10)
 # Answer.create(text: "Perejil, ajo, vinagre y aceite de oliva", correct: true, question_id: 10)
 
-  
 # Level.create(name:"Locro", text:"Ingredientes: \n- 250g. de porotos blancos \n- 250g. de maíz \n- Chorizo colorado \n- Chorizo criollo \n- Cueritos de cerdo \n- Huesitos de cerdo \n- Falda \n- 200g. de panceta \n- 3 cebollas \n- 2 cebollas de verdeo \n- 1/2 calabaza \n- 1/2 morrón rojo (para la salsa)\n
 #               Condimentos: sal, pimienta, comino, pimentón, ají molido, orégano \n
 #               Pasos:\n
@@ -120,8 +120,6 @@ User.destroy_all
 #               4- A la olla con todos los ingredientes agregarle la calabaza cortada en cubos, el pechito, la falda, los condimentos, un poco más de agua y revolver bien. Dejar nuevamente 1/2 hora en olla a presión o una hora y media mas en olla común.\n
 #               5- Preparar la salsita: picar el morrón, 1 cebolla de verdeo y 1 cebolla común bien bien finitos. \n Agregar ají molido (bastante si la queres más picante), pimentón y orégano.\nCocinar a fuego bajo en bastante aceite de oliva hasta que esté bien blandita la cebolla.\n
 #               6- Espesar y servir con la salsa encima y la parte verde de la cebolla de verdeo picada. Si te sobra, podes freezarlo.")
-
-
 
 # # LEVEL LOCRO
 # Question.create(text:"¿Cuál es la comida tipica de las fechas patrias?", difficulty: 1, link_imagen: "https://media.istockphoto.com/id/1398880959/es/foto/s%C3%ADmbolo-de-signo-de-interrogaci%C3%B3n-para-preguntas-frecuentes-informaci%C3%B3n-problemas-y-conceptos.webp?b=1&s=170667a&w=0&k=20&c=dMaP3PbKWnVSVzNI5Um5LS9bfoTMD058sEPRkQ_6-EM=", levels_id: 3, informed_text: "El locro es una especie de guiso de origen argentino comido especialmente en fechas patrias como el 25 de mayo y el 9 de julio.")
@@ -158,7 +156,6 @@ User.destroy_all
 # Answer.create(text: "Cebolla de verdeo y morron ", correct: false, question_id: 16)
 # Answer.create(text: "Cebolla y cebolla de verdeo", correct: false, question_id: 16)
 
-  
 # # FRONTERA A CHILE
 # Level.create(id: 1000, name:"Frontera a Chile", text:"")
 
@@ -211,7 +208,6 @@ User.destroy_all
 # Answer.create(text: "Porque no hay otra", correct: false, question: qev8)
 # Answer.create(text: "Porque genera más brasas que otras y le da un sabor distintivo", correct: true, question: qev8)
 # Answer.create(text: "La madera de pino es la madera comunmente utilizada para un asado", correct: false, question: qev8)
-
 
 # ## LOCRO EVALUATE
 # qev9 = Question.create(text:"¿Por qué la cocción del locro lleva alrededor de 4 horas?", difficulty: 3, link_imagen: "https://upc.edu.ar/wp-content/uploads/2020/05/Locro_Stevage.jpg", levels_id: 1000)

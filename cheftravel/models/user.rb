@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'question'
 require_relative 'correct_questions'
 require 'bcrypt'
@@ -32,11 +34,12 @@ class User < ActiveRecord::Base
 
   def sum_points(diff)
     new_points = self.points
-    if diff == 1
+    case diff
+    when 1
       new_points += 10
-    elsif diff == 2
+    when 2
       new_points += 20
-    elsif diff == 3
+    when 3
       new_points += 30
     end
     update_attribute :points, new_points
@@ -44,11 +47,12 @@ class User < ActiveRecord::Base
 
   def rest_points(diff)
     new_points = self.points
-    if diff == 1
+    case diff
+    when 1
       new_points -= 10
-    elsif diff == 2
+    when 2
       new_points -= 20
-    elsif diff == 3
+    when 3  
       new_points -= 30
     end
     update_attribute :points, new_points
