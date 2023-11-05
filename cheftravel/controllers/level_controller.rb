@@ -2,7 +2,8 @@
 
 # This class represents the controller for the levels and questions of the ChefTravel game.
 class LevelController < Sinatra::Application
-  before do
+  before ['/level'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

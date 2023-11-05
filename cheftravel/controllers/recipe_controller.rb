@@ -2,7 +2,8 @@
 
 # The RecipeController class handles the routes related to the recipe book and recipe pages.
 class RecipeController < Sinatra::Application
-  before do
+  before ['/recipe-book'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

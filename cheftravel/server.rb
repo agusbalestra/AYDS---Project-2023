@@ -15,7 +15,8 @@ require 'jwt'
 require_relative 'models/init'
 require_relative 'controllers/init'
 
-# Server for app
+# The App class is a Sinatra application that serves as the main entry point for the ChefTravel web application.
+# It includes the necessary controllers, middleware, and configuration for the application to function properly.
 class App < Sinatra::Application
   # Controllers
   use MenuController
@@ -39,18 +40,9 @@ class App < Sinatra::Application
     super()
   end
 
-  before ['/menu', '/arg', '/chile', '/ranking', '/level', '/question', '/correct', '/incorrect', '/profile',
-          '/update_profile'] do
-    redirect '/' unless current_user.present?
-    @user = current_user
-  end
-
-  # root page
+  # The root page of the application.
+  # Renders the index view.
   get '/' do
     erb :index
-  end
-
-  def current_user
-    User.find_by(id: session[:user_id])
   end
 end

@@ -2,7 +2,8 @@
 
 # This controller handles the ranking page, which displays the users ordered by their points.
 class RankingController < Sinatra::Application
-  before do
+  before ['/ranking'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

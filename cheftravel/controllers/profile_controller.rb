@@ -4,7 +4,8 @@ require_relative '../models/init'
 
 # The ProfileController class handles the routes related to the user profile.
 class ProfileController < Sinatra::Application
-  before do
+  before ['/profile', '/update_profile'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

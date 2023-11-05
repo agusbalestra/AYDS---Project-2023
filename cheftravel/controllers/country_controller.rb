@@ -4,7 +4,8 @@
 # It inherits from Sinatra::Application and defines routes for the countries of the game
 # The 'before' block sets the @user instance variable to the User object corresponding to the current session.
 class CountryController < Sinatra::Application
-  before do
+  before ['/arg', '/chile'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

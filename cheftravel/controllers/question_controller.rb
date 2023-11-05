@@ -2,7 +2,8 @@
 
 # This class represents the controller for handling questions in the ChefTravel application.
 class QuestionController < Sinatra::Application
-  before do
+  before ['/question', '/correct', '/incorrect'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 

@@ -2,7 +2,8 @@
 
 # The MenuController class handles the routes related to the menu of the ChefTravel web application.
 class MenuController < Sinatra::Application
-  before do
+  before ['/menu'] do
+    redirect '/' unless session[:user_id]
     @user = User.find_by(id: session[:user_id])
   end
 
