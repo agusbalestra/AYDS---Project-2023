@@ -2,25 +2,27 @@
 
 require_relative '../models/init'
 
-# Controller for profile
+# The ProfileController class handles the routes related to the user profile.
 class ProfileController < Sinatra::Application
   before do
     @user = User.find_by(id: session[:user_id])
   end
 
+  # Renders the user profile page with the user's progress.
   get '/profile' do
     total_questions = Question.count
-    # TODO: Implementar el cálculo del número de preguntas respondidas por el usuario
-    answered_questions = 1
+    answered_questions = CorrectQuestions.where(user_id: @user.id).count
     progress = (answered_questions.to_f / total_questions * 100).round(2)
 
     erb :profile, locals: { user: @user, progress: progress }
   end
 
+  # Renders the update profile page with the user's information.
   get '/update_profile' do
     erb :update_profile, locals: { user: @user, errors: [] }
   end
 
+  # Updates the user's information and redirects to the user profile page.
   post '/update_profile' do
     new_username = params[:name]
     current_pass = params[:current_password]

@@ -12,12 +12,13 @@
 Metrics/BlockLength:
   Exclude:
     - 'db/schema.rb'
-    - 'spec/user_spec.rb'
+    - 'spec/models/user_spec.rb'
 
 # Offense count: 22
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
-  Enabled: false
+  Exclude:
+    - 'db/migrate/*'
 
 # Offense count: 45
 # This cop supports safe autocorrection (--autocorrect).
@@ -26,3 +27,7 @@ Style/Documentation:
 Layout/LineLength:
   Exclude:
     - 'db/seeds.rb'
+
+Naming/FileName:
+  Exclude:
+    - 'Rakefile.rb'

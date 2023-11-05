@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+# This class represents the controller for handling questions in the ChefTravel application.
 class QuestionController < Sinatra::Application
   before do
     @user = User.find_by(id: session[:user_id])
   end
 
+  # This method handles the submission of a user's answer to a question.
+  # It updates the user's points and redirects to the next question or the same question if no answer was selected.
   post '/question' do
     question = Question.find(params[:question_id])
     option_id = params[:option_id].to_i
@@ -31,6 +34,7 @@ class QuestionController < Sinatra::Application
     end
   end
 
+  # This method renders the result page for a correct answer.
   get '/correct' do
     question_id = params[:question]
 
@@ -43,6 +47,7 @@ class QuestionController < Sinatra::Application
                            informed_text: question.informed_text }
   end
 
+  # This method renders the result page for an incorrect answer.
   get '/incorrect' do
     question_id = params[:question]
 

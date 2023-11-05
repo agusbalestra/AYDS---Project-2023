@@ -1,0 +1,4 @@
+Inspecting 45 files
+.............................................
+
+45 files inspected, no offenses detected

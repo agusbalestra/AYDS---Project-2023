@@ -2,8 +2,9 @@
 
 require_relative '../models/user'
 
+# This class represents the controller for the User model.
+# It handles the routes related to user authentication and registration.
 class UserController < Sinatra::Application
-
   # LOGIN
   post '/logmenu' do
     @user = User.find_by(name: params[:name])
@@ -43,7 +44,6 @@ class UserController < Sinatra::Application
     begin
       decoded_token = JWT.decode(jwt, nil, false)
 
-      # user_id = decoded_token[0]['sub']
       name = decoded_token[0]['name']
       email = decoded_token[0]['email']
 
@@ -67,7 +67,7 @@ class UserController < Sinatra::Application
 
   # LOGOUT
   get '/logout' do
-    session.clear   # Elimina todos los datos de la sesión
-    redirect '/'    # Redirige al usuario a la página de inicio
+    session.clear
+    redirect '/'
   end
 end

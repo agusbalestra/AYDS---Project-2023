@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+# This class represents the controller for the levels and questions of the ChefTravel game.
 class LevelController < Sinatra::Application
   before do
     @user = User.find_by(id: session[:user_id])
   end
 
+  # This method handles the GET request for a specific level and redirects to the first question of that level.
   get '/level/:id_level' do
     level = Level.find_by(id: params[:id_level])
     questions_level = Question.where(levels_id: level.id)
@@ -13,6 +15,7 @@ class LevelController < Sinatra::Application
     redirect "/level/#{params[:id_level]}/question/#{question.id}"
   end
 
+  # This method handles the GET request for a specific question of a specific level and renders the corresponding view.
   get '/level/:id_level/question/:id_question' do
     level = Level.find_by(id: params[:id_level])
     question = Question.find_by(id: params[:id_question])
