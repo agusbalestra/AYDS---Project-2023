@@ -18,11 +18,14 @@ require_relative 'controllers/init'
 # Server for app
 class App < Sinatra::Application
   # Controllers
+  use MenuController
   use UserController
   use QuestionController
   use LevelController
   use ProfileController
   use CountryController
+  use RankingController
+  use RecipeController
 
   use OmniAuth::Builder do
     provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com',
@@ -45,17 +48,6 @@ class App < Sinatra::Application
   # root page
   get '/' do
     erb :index
-  end
-
-  get '/menu' do
-    erb :menu, locals: { user: @user }
-  end
-
-  get '/ranking' do
-    usersname = User.select(:name, :points).order(points: :desc)
-    userspoints = User.select(:points).order(points: :desc)
-
-    erb erb :ranking, locals: { usersname: usersname, index: 0, userspoints: userspoints, user: @user }
   end
 
   def current_user

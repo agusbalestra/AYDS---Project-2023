@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
+
 class RecipeController < Sinatra::Application
+  before do
+    @user = User.find_by(id: session[:user_id])
+  end
+
   get '/recipe-book' do
-    max_lv = current_user.current_level
+    max_lv = @user.current_level
     levels = []
 
     if max_lv != 0
@@ -12,7 +17,7 @@ class RecipeController < Sinatra::Application
       end
     end
 
-    erb :recipebook, locals: { user: current_user, levels: levels }
+    erb :recipebook, locals: { user: @user, levels: levels }
   end
 
   get '/recipe-book/:id_level' do
