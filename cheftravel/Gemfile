@@ -5,7 +5,7 @@ gem 'bcrypt'
 gem 'jwt'
 gem 'omniauth-google-oauth2'
 gem 'rake'
-gem 'rubocop', '~> 1.57', require: false
+gem 'rubocop', require: false
 gem 'sinatra-activerecord'
 gem 'sinatra-flash'
 gem 'sqlite3'
@@ -18,4 +18,3 @@ github 'sinatra/sinatra' do
   gem 'sinatra'
   gem 'sinatra-contrib'
 end
-gem 'rubocop', require: false
