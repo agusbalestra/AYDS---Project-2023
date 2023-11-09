@@ -8,7 +8,7 @@ class UserController < Sinatra::Application
   # LOGIN
   post '/logmenu' do
     @user = User.find_by(name: params[:name])
-    if @user.present? && @user.authenticate(params[:password_digest]) # va password_digest?
+    if @user.present? && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/menu'
     else
