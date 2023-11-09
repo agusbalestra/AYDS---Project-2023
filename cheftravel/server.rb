@@ -1,190 +1,48 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'sinatra/reloader'
 require 'sinatra/cookies'
+require 'sinatra/flash'
+require 'sinatra/reloader'
 require 'bundler/setup'
+require 'bcrypt'
+require 'omniauth'
+require 'omniauth-google-oauth2'
+require 'json'
+require 'jwt'
 
-require_relative 'models/question'
-require_relative 'models/user'
-require_relative 'models/answer'
-require_relative 'models/level'
-require_relative 'models/recipe'
+require_relative 'models/init'
+require_relative 'controllers/init'
 
+# The App class is a Sinatra application that serves as the main entry point for the ChefTravel web application.
+# It includes the necessary controllers, middleware, and configuration for the application to function properly.
 class App < Sinatra::Application
-  
+  # Controllers
+  use MenuController
+  use UserController
+  use QuestionController
+  use LevelController
+  use ProfileController
+  use CountryController
+  use RankingController
+  use RecipeController
+
+  use OmniAuth::Builder do
+    provider :google_oauth2, '832010478415-ugp0o039v71f8kv1334rckru6tegj2qa.apps.googleusercontent.com',
+             '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'
+  end
+
   enable :sessions
   register Sinatra::Cookies
 
-  def initialize(app = nil)
+  def initialize(_app = nil)
     super()
   end
 
-  before '/menu' do
-    unless current_user.present?
-      redirect '/'
-    end
-  end
-
-  ## 
+  # The root page of the application.
+  # Renders the index view.
   get '/' do
     erb :index
   end
-
-  ##
-  get '/register' do
-    erb :register
-  end
-
-  ##REGISTERMENU
-  post '/registermenu' do
-
-    user = User.new(params)
-    if user.valid?
-      user.points = 0
-      user.save
-      session[:user_id] = user.id
-      erb :menu, locals: { user: user }
-    else
-      erb :fail_register, locals: { msgfail: user.errors.full_messages }
-    end
-  end
-  
-
-  ## LOGMENU
-  post '/logmenu' do
-
-    user = User.find_by(name: params[:name], password: params[:password])
-
-    if user
-      session[:user_id] = user.id
-      redirect '/menu'
-    else
-      msg = "Usuario y/o contraseña incorrectos. Inténtalo nuevamente"
-      erb :fail_login, locals: {msg: msg}
-    end
-  end
-
-
-  get '/menu' do
-    user = current_user
-    erb :menu, locals: {user: user}
-  end
-
-
-  get '/arg' do
-    user = current_user
-    erb :arg, locals: {user: user}
-  end
-
-
-  get '/chile' do
-    user = current_user
-    erb :chile, locals: {user: user}
-  end
-
-
-  get '/ranking' do
-    user = current_user
-    usersname = User.select(:name).order(points: :desc)
-    userspoints = User.select(:points).order(points: :desc)
-
-    erb erb :ranking, locals: {usersname: usersname, index: 0, userspoints: userspoints, user: user}
-  end
-
-
-  get '/level/:id_level' do
-    level = Level.find_by(id: params[:id_level])
-    questions_level = Question.where(levels_id: level.id)
-    question = questions_level.first
-
-    redirect "/level/#{params[:id_level]}/question/#{question.id}"
-  end
-
-
-  get '/level/:id_level/question/:id_question' do
-    if current_user.present?
-      level = Level.find_by(id: params[:id_level])
-      question = Question.find_by(id: params[:id_question])
-      
-      if (question.present?)
-        if (level.id == question.levels_id)
-          answers = Answer.where(question_id: question.id)
-          user = current_user
-          
-          if level.id < 1000
-            erb :question, locals: {level: level, question: question, answers: answers, user: user}
-          else
-            if user.points > 170
-              erb :frontera, locals: {level: level, question: question, answers: answers, user: user}
-            else
-              redirect '/menu'
-            end
-          end
-        else
-          redirect '/menu'
-        end
-      else
-        redirect '/menu'
-      end
-
-    else # user not logued
-      redirect '/'  
-    end
-  end
-
-
-  post '/question' do      
-    question = Question.find(params[:question_id])
-    option_id = params[:option_id].to_i
-    
-    if option_id == 0 # si el usuario no seleciona una respuesta 
-      
-      redirect "/level/#{question.levels_id}/question/#{question.id}"
-    
-    else # si el usuario selecciona una respuesta 
-
-      option = Answer.find(option_id)
-      user = current_user
-      informed_text = question.informed_text
-      correct_answer = question.answers.find_by(correct: true)
-
-      if option.correct
-        result_message = "¡CORRECTO!"
-        user.sum_points(question)
-      else 
-        result_message = "INCORRECTO"
-        user.rest_points(question)
-      end
-
-      erb :result, locals: { result_message: result_message, id_question: question.id , id_level: question.levels_id, user: user, informed_text: informed_text, correct_answer: correct_answer}
-    end
-  end
-
-  
-  get '/logout' do
-    session.clear   # Elimina todos los datos de la sesión
-    redirect '/'    # Redirige al usuario a la página de inicio
-  end
-
-
-  ## PROFILE
-  get '/profile' do
-    if current_user.present?
-      
-      
-      erb :profile
-    else
-      redirect '/'
-    end
-  end
-
-  post '/profile' do
-    
-  end
-
-  ## METHODS
-  def current_user
-    User.find_by(id: session[:user_id])
-  end
-  
 end

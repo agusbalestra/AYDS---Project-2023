@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require 'simplecov'
 
-#
 SimpleCov.start
 
 ENV['RACK_ENV'] ||= 'test'
 ENV['APP_ENV'] ||= 'test'
 
-#ActiveRecord::Base.logger.level = 1
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/test.sqlite3') # Cambia los detalles según tu configuración
+# ActiveRecord::Base.logger.level = 1
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/test.sqlite3')
 
-require_relative '../config/enviroment.rb'
+require_relative '../config/enviroment'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

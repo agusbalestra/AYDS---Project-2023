@@ -2,7 +2,12 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="/question.css">
-
+  <style>
+    #timer {
+      color: green;
+      font-size: 24px;
+    }
+  </style>
 </head>
 <body>
   <h1>Nivel <%= level.id %>: Cocinemos <%= level.name %>, <%= user.firstname %>!</h1>
@@ -20,9 +25,35 @@
         <% end %>
         <br>
         <input type="submit" value="Responder">
+        <input type="hidden" name="timeout" value="false">
       </form>
+       <p id="timer"><span id="countdown"></span></p>
     </div>
   </main>
+
+  <script>
+  var countdown = 5; // Aquí define la cantidad de segundos para el tiempo límite
+  var timerElement = document.getElementById("timer");
+
+  function updateTimer() {
+    timerElement.textContent = `Tiempo restante: ${countdown}`;
+    countdown--;
+
+    if (countdown < 0) {
+      setTimeout(function(){
+       document.querySelector('form input[name="timeout"]').value = 'true'; 
+       document.querySelector('form').submit();
+      },1000);
+    } else {
+      setTimeout(updateTimer, 1000); // Llama a la función "updateTimer" 
+    }
+  }
+
+  // Inicia la cuenta regresiva al cargar la pregunta
+  window.onload = function() {
+    updateTimer();
+  }
+</script>
 
 
   <p class="puntos-izq">Puntos: <%= user.points.to_json%></p>

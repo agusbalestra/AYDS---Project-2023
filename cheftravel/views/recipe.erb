@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title><%= level.name %> Recipe - ChefTravel</title>
+
+  <link rel="stylesheet" type="text/css" href="/recipebook.css"></head>
+  <body>
+        <nav>
+        <ul class="menu">
+          <li><a href="http://localhost:4567/menu">Menú</a></li>
+          <li><a href="http://localhost:4567/recipe-book">Recetario</a></li>
+          <li><a href="http://localhost:4567/ranking">Ranking</a></li>
+          <li><a href="http://localhost:4567/profile"><%= user.name%></a></li>
+          <li><a>Puntos: <%= user.points.to_json%></a></li>
+          <li><a href="http://localhost:4567/logout">Logout</a></li>
+        </ul>
+      </nav>
+
+      <main class="table">
+      <section class="table__header">
+        <h1><%= level.name %></h1>
+      </section>
+      <section class="table__body">
+        <table>
+          <tbody>
+            <%= level.text %>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
