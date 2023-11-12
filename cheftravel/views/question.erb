@@ -10,7 +10,7 @@
   </style>
 </head>
 <body>
-  <h1>Nivel <%= level.id %>: Cocinemos <%= level.name %>, <%= user.firstname %>!</h1>
+  <h1>Nivel <%= level.id %>: Cocinemos <%= level.name %>, <%= user.name %>!</h1>
   
   <img src="<%= question.link_imagen %>" border="1" width="300" height="200">
   
@@ -57,7 +57,7 @@
 
 
   <p class="puntos-izq">Puntos: <%= user.points.to_json%></p>
-  <p class="nombre-der">user: <%= user.name%></p>
+  <p class="nombre-der">user: <%= user.name %></p>
 
   <a href="http://localhost:4567/menu"><input type="submit" name="menu" value="Volver al menú"></a>
 </body>
