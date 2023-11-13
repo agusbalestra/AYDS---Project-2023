@@ -1,11 +1,11 @@
 /* menu de arriba */
 .menu {
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   list-style-type: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ff4400a5;
+  background-color: #ffb447;
 }
 
 .menu li {
@@ -14,18 +14,18 @@
 
 .menu li a {
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   padding: 10px;
   transition: background-color 0.3s ease;
 }
 
 .menu li a:hover {
-  background-color: #ff4500;
+  background-color: #ff7851;
   border-radius: 5px;
 }
 
 body {
-  background-image: url('https://img.https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/09/truco-genial-limpiar-matar-bacterias-tabla-cortar-usar-jabon-2481529.jpg?tf=1200x.com/foto-gratis/lay-flat-disposiciones-frescas-donacion-bloc-notas_23-2148733840.jpg?w=1060&t=st=1695346128~exp=1695346728~hmac=28d4a471128b75c88d234711b3ee60a39e5adc57e14c01ea2efc66fb2a1da4ce');
+  background-image: url("https://64.media.tumblr.com/d19e97db5ca9019ad247888982277869/tumblr_muq8cycQas1qbzzgco1_1280.png");
   background-size: cover;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -34,20 +34,20 @@ body {
 
 h1 {
   text-align: center;
-  color: #ff4500; /* Dark Orange color */
+  color: #5b4620;
 }
 
 form {
   max-width: 500px;
   margin: 0 auto;
   padding: 40px;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  background-color: #f5f5dc;
   border-radius: 20px;
 }
 
 label {
   font-size: 16px;
-  color: #333;
+  color: #5b4620;
 }
 
 input[type="text"],
@@ -56,13 +56,13 @@ input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #5b4620;
   border-radius: 5px;
   font-size: 16px;
 }
 
 input[type="submit"] {
-  background-color: #ff4500; /* Dark Orange color */
+  background-color: #ffb447;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -72,11 +72,11 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #ff6347; /* Lighter shade of orange on hover */
+  background-color: #ff7851;
 }
 
 .error {
-  color: #f00; /* Red color for error messages */
+  color: #ff0000;
   font-weight: bold;
 }
 

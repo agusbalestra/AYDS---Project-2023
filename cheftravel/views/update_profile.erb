@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Update Profile</title>
-  <link rel="stylesheet" type="text/css" href="/update_profile.css"></head>
+  <link rel="stylesheet" type="text/css" href="/update_profile.css">
 </head>
 <body>
   <nav>
@@ -10,8 +10,8 @@
       <li><a href="http://localhost:4567/menu">Menú</a></li>
       <li><a href="#">Recetario</a></li>
       <li><a href="http://localhost:4567/ranking">Ranking</a></li>
-      <li><a href="http://localhost:4567/profile"><%= user.name%></a></li>
-      <li><a>Puntos: <%= user.points.to_json%></a></li>
+      <li><a href="http://localhost:4567/profile"><%= user.name %></a></li>
+      <li><a>Puntos: <%= user.points.to_json %></a></li>
       <li><a href="http://localhost:4567/logout">Logout</a></li>
     </ul>
   </nav>
@@ -28,12 +28,11 @@
   <form action="/update_profile" method="post">
     <!-- Name -->
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name""><br>
-
+    <input type="text" id="name" name="name" value="<%= user.name %>"><br>
 
     <!-- Email -->
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email"><br>
+    <input type="email" id="email" name="email" value="<%= user.email %>"><br>
 
     <!-- Current Password -->
     <label for="current_password">Current Password:</label>

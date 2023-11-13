@@ -5,6 +5,7 @@ require_relative 'correct_questions'
 
 # This class represents a user in the system.
 class User < ActiveRecord::Base
+  # Method for encrypting the password.
   has_secure_password
 
   has_many :correct_questions
